@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="body">
+    
+    <nav class="navigation-bar">
+        <a href="{%url 'home.html' %}">Home</a>
+        <a href="{% url 'employee.html'%}">Employee</a>
+        <a href="{%url 'client.html'%}">Client</a>
+        <a href="{% url 'property.html'%}">Properties</a>
+        <a href="{% url 'payment.html'%}" class="active">Payments</a>
+        <a href="{% url 'lease.html'%}">Lease</a>
+    </nav>
+
+    <form>
+
+        <label>Amount Paid</label>
+        <input type="text" id="amountPaid" name="Amountpaid" placeholder="Enter Amount">
+        <br><br>
+
+        <label>Payment Mode</label>
+        <select name="Payment_mode" id="Payment_mode">
+            <option value="Cash">Cash</option>
+            <option value="Mobile-money">Mobile Money</option>
+            <option value="Cheque">Cheque</option>
+            <option value="Visa-card">Debit/Credit Card</option>
+        </select>
+        <br><br>
+
+        <label for="phone">Contact</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter Contact">
+        <br><br>
+
+        <label>Address</label>
+        <input type="text" id="address" name="address" placeholder="Enter Address">
+        <br><br>
+
+        <label>Email</label><br>
+        <input type="email" id="email" name="email" placeholder="spongebob22@gmail.com">
+        <br><br>
+    </form>
+
+
+    <h2>PAYMENT TABLE</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Payment_id</th>
+            <th>Property_id</th>
+            <th>EmpID</th>
+            <th>ClientID</th>
+            <th>Mode_o_payment</th>
+            <th>Amount_paid</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>PAY001</td>
+            <td>P001</td>
+            <td>E001</td>
+            <td>C001</td>
+            <td>Bank Transfer</td>
+            <td>85000000</td>
+        </tr>
+        <tr>
+            <td>PAY002</td>
+            <td>P004</td>
+            <td>E002</td>
+            <td>C002</td>
+            <td>Mobile Money</td>
+            <td>30000000</td>
+        </tr>
+        <tr>
+            <td>PAY003</td>
+            <td>P002</td>
+            <td>E001</td>
+            <td>C003</td>
+            <td>Cheque</td>
+            <td>10000000</td>
+        </tr>
+        <tr>
+            <td>PAY004</td>
+            <td>P003</td>
+            <td>E003</td>
+            <td>C004</td>
+            <td>Bank Transfer</td>
+            <td>20000000</td>
+        </tr>
+        <tr>
+            <td>PAY005</td>
+            <td>P005</td>
+            <td>E004</td>
+            <td>C005</td>
+            <td>Cash</td>
+            <td>50000000</td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

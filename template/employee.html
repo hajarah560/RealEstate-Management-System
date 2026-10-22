@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="body">
+    <nav class="navigation-bar">
+        <a href="{% url 'home_page'%}">Home</a>
+        <a href="{% url 'employee_page'%}">Employee</a>
+        <a href="{% url 'client_page'%}">Client</a>
+        <a href="{% url 'property_page'%}">Properties</a>
+        <a href="{% url 'payment.html'%}">Payments</a>
+        <a href="{% url 'lease.html'%}">Lease</a>
+    </nav>
+
+    <P>
+     <h2>EMPLOYEE REGISTRATION</h2>
+    </P>
+  
+
+    <form>
+
+        <label>Employee First Name</label>
+        <input type="text" id="employee" name="employee" placeholder="Enter First Name">
+        <br><br>
+
+        <label>Employee Last Name</label>
+        <input type="text" id="employeeName" name="employeeName" placeholder="Enter Last Name">
+        <br><br>
+
+        <label for="phone">Gender</label>
+        <select name="gender" id="genger-type">
+            <option value="MALE">MALE</option>
+            <option value="MALE">FEMALE</option>
+        </select>
+        <br><br>
+
+        <label for="phone">Contact</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter Contact">
+        <br><br>
+
+        <label>Address</label>
+        <input type="text" id="address" name="address" placeholder="Enter Address">
+        <br><br>
+
+        <label>Email</label><br>
+        <input type="email" id="email" name="email" placeholder="spongebob22@gmail.com">
+        <br><br>
+    </form>
+
+
+    <h2>EMPLOYEE TABLE</h2>
+<table>
+    <thead>
+        <tr>
+            <th>EmpID</th>
+            <th>First_name</th>
+            <th>Last_name</th>
+            <th>Gender</th>
+            <th>Contact</th>
+            <th>Address</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>E001</td>
+            <td>Alex</td>
+            <td>Ssemwogerere</td>
+            <td>Male</td>
+            <td>0774001122</td>
+            <td>Ntinda</td>
+            <td>alex.s@realestate.com</td>
+        </tr>
+        <tr>
+            <td>E002</td>
+            <td>Joan</td>
+            <td>Nakamya</td>
+            <td>Female</td>
+            <td>0703334455</td>
+            <td>Kisaasi</td>
+            <td>joan.n@realestate.com</td>
+        </tr>
+        <tr>
+            <td>E003</td>
+            <td>Moses</td>
+            <td>Waiswa</td>
+            <td>Male</td>
+            <td>0782667788</td>
+            <td>Naalya</td>
+            <td>moses.w@realestate.com</td>
+        </tr>
+        <tr>
+            <td>E004</td>
+            <td>Anita</td>
+            <td>Kembabazi</td>
+            <td>Female</td>
+            <td>0751990011</td>
+            <td>Rubaga</td>
+            <td>anita.k@realestate.com</td>
+        </tr>
+        <tr>
+            <td>E005</td>
+            <td>Brian</td>
+            <td>Otim</td>
+            <td>Male</td>
+            <td>0776223344</td>
+            <td>Bweyogerere</td>
+            <td>brian.o@realestate.com</td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+
+</html>

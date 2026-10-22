@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="body">
+
+    <nav class="navigation-bar">
+        <a href="{% url 'home.html'%}">Home</a>
+        <a href="{% url 'employee.html'%}">Employee</a>
+        <a href="{% url 'client.html'%}">Client</a>
+        <a href="{% url 'property.html'%}" class="active">Properties</a>
+        <a href="{% url 'payment.html'%}">Payments</a>
+        <a href="{% url 'lease.html'%}">Lease</a>
+    </nav>
+
+     <h2>PROPERTY REGISTRATION</h2>
+
+    <form>
+
+        <label>Property_name</label>
+        <input type="text" id="propertyName" name="propertyName" placeholder="Enter Property Name">
+        <br><br>
+
+        <label>Property_id</label>
+        <input type="text" id="property" name="License" placeholder="Enter Property_id">
+        <br><br>
+
+        <label>Location</label>
+        <input type="text" id="location" name="location" placeholder="Enter Location">
+        <br><br>
+
+        <label>Status</label>
+        <select name="Status" id="Status">
+            <option value="TAKEN">TAKEN</option>
+            <option value="NOT TAKEN">NOT TAKEN</option>
+        </select>
+        <br><br>
+
+
+
+        <label for="phone">Contact</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter Contact">
+        <br><br>
+
+        <label>Property Address</label>
+        <input type="text" id="address" name="address" placeholder="Enter Property Address">
+        <br><br>
+    </form>
+    
+
+    <h2>PROPERTY TABLE</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>PropertyID</th>
+                <th>License</th>
+                <th>Location</th>
+                <th>Propertystatus</th>
+                <th>Selling-Price</th>
+            </tr>
+        </thead>
+
+        <tr>
+            <td>P001</td>
+            <td>KCCA00</td>
+            <td>KASUBI</td>
+            <td>TAKEN</td>
+            <td>85000000</td>
+        </tr>
+
+        <tr>
+            <td>P002</td>
+            <td>URA111</td>
+            <td>KIBULI</td>
+            <td>FREE</td>
+            <td>20000000</td>
+        </tr>
+
+        <tr>
+            <td>P003</td>
+            <td>KCCA12</td>
+            <td>KISASI</td>
+            <td>FREE</td>
+            <td>40000000</td>
+        </tr>
+
+        <tr>
+            <td>P004</td>
+            <td>KCCA32</td>
+            <td>KAWEMPE</td>
+            <td>TAKEN</td>
+            <td>30000000</td>
+        </tr>
+
+        <tr>
+            <td>P005</td>
+            <td>KCCA25</td>
+            <td>KAWEMPE</td>
+            <td>FREE</td>
+            <td>50000000</td>
+        </tr>
+
+    </table>
+
+
+    <!-- LAND -->
+    
+    <h2>LAND TABLE</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>LandID</th>
+                <th>Land_size</th>
+                <th>Land_type</th>
+                <th>Property_id</th>
+            </tr>
+        </thead>
+
+        <tr>
+            <td>L001</td>
+            <td>50/100</td>
+            <td>Free_hold</td>
+            <td>P001</td>
+        </tr>
+
+        <tr>
+            <td>L002</td>
+            <td>100/100</td>
+            <td>Mailo_land</td>
+            <td>P004</td>
+        </tr>
+
+        <tr>
+            <td>L003</td>
+            <td>75/100</td>
+            <td>Mailo_land</td>
+            <td>P001</td>
+        </tr>
+
+        <tr>
+            <td>L004</td>
+            <td>50/100</td>
+            <td>Free_hold</td>
+            <td>P002</td>
+        </tr>
+
+        
+        <tr>
+            <td>L005</td>
+            <td>45/100</td>
+            <td>Free_hold</td>
+            <td>P004</td>
+        </tr>
+
+    </table>
+
+    <!-- BUILDING -->
+
+    <h2>BUILDING TABLE</h2>
+<table>
+    <thead>
+        <tr>
+            <th>BuildingID</th>
+            <th>Property_id</th>
+            <th>Building_name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>B001</td>
+            <td>P001</td>
+            <td>Kasubi Plaza</td>
+        </tr>
+        <tr>
+            <td>B002</td>
+            <td>P003</td>
+            <td>Kisasi Heights</td>
+        </tr>
+        <tr>
+            <td>B003</td>
+            <td>P004</td>
+            <td>Kawempe Commercial Complex</td>
+        </tr>
+        <tr>
+            <td>B004</td>
+            <td>P002</td>
+            <td>Kibuli Apartments</td>
+        </tr>
+        <tr>
+            <td>B005</td>
+            <td>P005</td>
+            <td>Kawempe Towers</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+
+</html>

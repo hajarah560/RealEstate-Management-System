@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="body">
+    
+    <nav class="navigation-bar">
+        <a href="{% url 'home_page'%}">Home</a>
+        <a href="{% url 'employee_page'%}">Employee</a>
+        <a href="{% url 'client_page'%}">Client</a>
+        <a href="{% url 'property_page'%}">Properties</a>
+        <a href="{% url 'payment_page'%}">Payment</a>
+        <a href="{% url 'lease_page'%}">Lease</a>
+    </nav>
+
+    <h2>CLIENT REGISTRATION</h2>
+
+    <form>
+
+        <label>Client First Name</label>
+        <input type="text" id="clientName" name="clientName" placeholder="Enter First Name">
+        <br><br>
+
+        <label>Client Last Name</label>
+        <input type="text" id="clientName" name="clientName" placeholder="Enter Last Name">
+        <br><br>
+
+        <label for="phone">Contact</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter Contact">
+        <br><br>
+
+        <label>Address</label>
+        <input type="text" id="address" name="address" placeholder="Enter Address">
+        <br><br>
+
+        <label>Email</label>
+        <input type="email" id="email" name="email" placeholder="spongebob22@gmail.com">
+        <br><br>
+
+        <button type="submit">ADD CLIENT</button>
+
+    </form>
+
+
+    <h2>CLIENT TABLE</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ClientID</th>
+            <th>First_name</th>
+            <th>Last_name</th>
+            <th>Gender</th>
+            <th>Contact</th>
+            <th>Address</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>C001</td>
+            <td>John</td>
+            <td>Mugisha</td>
+            <td>Male</td>
+            <td>0772123456</td>
+            <td>Kampala</td>
+            <td>john.mugisha@gmail.com</td>
+        </tr>
+        <tr>
+            <td>C002</td>
+            <td>Sarah</td>
+            <td>Namubiru</td>
+            <td>Female</td>
+            <td>0701987654</td>
+            <td>Entebbe</td>
+            <td>s.namubiru@yahoo.com</td>
+        </tr>
+        <tr>
+            <td>C003</td>
+            <td>David</td>
+            <td>Okello</td>
+            <td>Male</td>
+            <td>0753112233</td>
+            <td>Jinja</td>
+            <td>dokello@gmail.com</td>
+        </tr>
+        <tr>
+            <td>C004</td>
+            <td>Grace</td>
+            <td>Achieng</td>
+            <td>Female</td>
+            <td>0784556677</td>
+            <td>Mukono</td>
+            <td>gachieng@hotmail.com</td>
+        </tr>
+        <tr>
+            <td>C005</td>
+            <td>Peter</td>
+            <td>Kato</td>
+            <td>Male</td>
+            <td>0702445566</td>
+            <td>Wakiso</td>
+            <td>peter.kato@gmail.com</td>
+        </tr>
+    </tbody>
+</table>
+    
+
+</body>
+</html>
