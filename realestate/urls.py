@@ -16,17 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from management.views import index, home, client, lease, property, payment,employee
+from management.views import home_view, employee_view, add_client_view, lease_view, property_view, payment_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name="index_page"),
-    path('/home', home, name ="home_page"),
-    path('/employee', employee, name="employee_page"),
-    path('/client', client, name="client_page"),
-    path('/property', property, name="property_page"),
-    path('/payment', payment, name="payment_page"),
-    path('/lease', lease, name = "lease_page")
+    path('', home_view, name ="home_page"),
+    path('employee/', employee_view, name="employee_page"),
+    path('client/', add_client_view, name="client_page"),
+    path('property/', property_view, name="property_page"),
+    path('payment/', payment_view, name="payment_page"),
+    path('lease/', lease_view, name = "lease_page")
 ]
 
 

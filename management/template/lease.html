@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="body">
-    <nav class="navigation-bar">
-        <a href="home.html">Home</a>
-        <a href="employee.html" >Employee</a>
-        <a href="client.html">Client</a>
-        <a href="property.html">Properties</a>
-        <a href="payment.html">Payments</a>
-        <a href="lease.html" class="active">Lease</a>
+     <nav class="navigation-bar">
+        <a href="{% url 'home_page'%}">Home</a>
+        <a href="{% url 'employee_page'%}">Employee</a>
+        <a href="{% url 'client_page'%}">Client</a>
+        <a href="{% url 'property_page'%}">Properties</a>
+        <a href="{% url 'payment_page'%}">Payments</a>
+        <a href="{% url 'lease_page'%}">Lease</a>
     </nav>
 
     
