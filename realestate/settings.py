@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'management',
     'crispy_forms',
-    'crispy_bootstrap5',
+    'crispy_bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -119,9 +119,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [
+STATIC_DIRS = [
     os.path.join(BASE_DIR)
 ]
+
 
 
 # Email
@@ -133,5 +134,5 @@ MAILERS = {
     },
 }
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK =  "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
