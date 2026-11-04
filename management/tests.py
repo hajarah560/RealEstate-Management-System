@@ -46,3 +46,49 @@ class RecordViewsTests(TestCase):
         response = self.client.post(reverse('payment_page'), {})
         self.assertContains(response, 'This field is required')
         self.assertFalse(Payment.objects.exists())
+
+
+class SignUpTests(TestCase):
+    def test_user_can_sign_up(self):
+        from django.contrib.auth import get_user_model
+
+        response = self.client.post(reverse('sign_up_page'), {
+            'username': 'newuser',
+            'password1': 'Strong-pass-4821!',
+            'password2': 'Strong-pass-4821!',
+        }, follow=True)
+        user = get_user_model().objects.get(username='newuser')
+        self.assertTrue(user.check_password('Strong-pass-4821!'))
+        self.assertContains(response, 'User created successfully.')
+
+    def test_invalid_sign_up_shows_errors(self):
+        from django.contrib.auth import get_user_model
+
+        response = self.client.post(reverse('sign_up_page'), {
+            'username': 'newuser',
+            'password1': 'Strong-pass-4821!',
+            'password2': 'different-password',
+        })
+        self.assertContains(response, 'The two password fields')
+        self.assertFalse(get_user_model().objects.filter(username='newuser').exists())
+
+
+class LoginLogoutTests(TestCase):
+    def setUp(self):
+        from django.contrib.auth import get_user_model
+        self.user = get_user_model().objects.create_user(username='testuser', password='Strong-pass-4821!')
+
+    def test_login_redirects_to_home_and_logout_redirects_to_login(self):
+        login_page = reverse('login')
+        response = self.client.post(login_page, {'username': 'testuser', 'password': 'Strong-pass-4821!'})
+        self.assertRedirects(response, reverse('home_page'))
+        self.assertIn('_auth_user_id', self.client.session)
+        response = self.client.post(reverse('logout'))
+        self.assertRedirects(response, login_page)
+        self.assertNotIn('_auth_user_id', self.client.session)
+
+    def test_wrong_password_does_not_log_in(self):
+        response = self.client.post(reverse('login'), {'username': 'testuser', 'password': 'wrong'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context['form'].errors)
+        self.assertNotIn('_auth_user_id', self.client.session)

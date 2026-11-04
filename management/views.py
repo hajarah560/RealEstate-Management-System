@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import get_object_or_404, redirect, render
 from management.forms import ClientForm, EmployeeForm, LeaseForm, LandForm, BuildingForm, PaymentForm
 from management.models import Client, Employee, Lease, Land, Building, Payment
@@ -6,6 +7,20 @@ from management.models import Client, Employee, Lease, Land, Building, Payment
 
 def home_view(request):
     return render(request, "home.html")
+
+
+def sign_up_view(request):
+    if request.method == "POST":
+        sign_up_form = UserCreationForm(request.POST)
+        if sign_up_form.is_valid():
+            sign_up_form.save()
+            messages.success(request, "User created successfully.")
+            return redirect("sign_up_page")
+    else:
+        sign_up_form = UserCreationForm()
+
+    context = {'form': sign_up_form}
+    return render(request, "registration/sign_up.html", context)
 
 
 def add_client_view(request):

@@ -16,7 +16,16 @@
             <a href="{% url 'land_page' %}">Land</a> |
             <a href="{% url 'building_page' %}">Building</a> |
             <a href="{% url 'payment_page' %}">Payments</a> |
-            <a href="{% url 'lease_page' %}">Lease</a>
+            <a href="{% url 'lease_page' %}">Lease</a> |
+            <a href="{% url 'sign_up_page' %}">Sign Up</a> |
+            {% if user.is_authenticated %}
+                <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-link p-0">Log Out</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Log In</a>
+            {% endif %}
         </nav>
     </div>
 
