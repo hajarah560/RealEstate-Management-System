@@ -16,17 +16,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from management.views import home_view, add_employee_view, add_client_view, lease_view, add_building_view, add_land_view, payment_view
+from management import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_view, name ="home_page"),
-    path('employee/', add_employee_view, name="employee_page"),
-    path('client/', add_client_view, name="client_page"),
-    path('land/', add_land_view, name="land_page"),
-    path('building/', add_building_view, name="building_page"),
-    path('payment/', payment_view, name="payment_page"),
-    path('lease/', lease_view, name = "lease_page")
+    path('', views.home_view, name='home_page'),
+    path('client/', views.add_client_view, name='client_page'),
+    path('client/<int:client_id>/edit/', views.edit_client_view, name='edit_client_page'),
+    path('client/<int:client_id>/delete/', views.delete_client_view, name='delete_client_page'),
+    path('employee/', views.add_employee_view, name='employee_page'),
+    path('employee/<int:employee_id>/edit/', views.edit_employee_view, name='edit_employee_page'),
+    path('employee/<int:employee_id>/delete/', views.delete_employee_view, name='delete_employee_page'),
+    path('land/', views.add_land_view, name='land_page'),
+    path('land/<int:land_id>/edit/', views.edit_land_view, name='edit_land_page'),
+    path('land/<int:land_id>/delete/', views.delete_land_view, name='delete_land_page'),
+    path('building/', views.add_building_view, name='building_page'),
+    path('building/<int:building_id>/edit/', views.edit_building_view, name='edit_building_page'),
+    path('building/<int:building_id>/delete/', views.delete_building_view, name='delete_building_page'),
+    path('lease/', views.lease_view, name='lease_page'),
+    path('lease/<int:lease_id>/edit/', views.edit_lease_view, name='edit_lease_page'),
+    path('lease/<int:lease_id>/delete/', views.delete_lease_view, name='delete_lease_page'),
+    path('payment/', views.payment_view, name='payment_page'),
+    path('payment/<int:payment_id>/edit/', views.edit_payment_view, name='edit_payment_page'),
+    path('payment/<int:payment_id>/delete/', views.delete_payment_view, name='delete_payment_page'),
 ]
-
-

@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Real Estate Management{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container">
+        <nav class="my-4">
+            <a href="{% url 'home_page' %}">Home</a> |
+            <a href="{% url 'employee_page' %}">Employee</a> |
+            <a href="{% url 'client_page' %}">Client</a> |
+            <a href="{% url 'land_page' %}">Land</a> |
+            <a href="{% url 'building_page' %}">Building</a> |
+            <a href="{% url 'payment_page' %}">Payments</a> |
+            <a href="{% url 'lease_page' %}">Lease</a>
+        </nav>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

@@ -14,6 +14,9 @@ class Client(models.Model):
     address = models.CharField(max_length=100, null= True ,default="N/A")
     email = models.CharField()
 
+    def __str__(self):
+        return f'{self.firstname} {self.lastname} (#{self.pk})'
+
 class Employee(models.Model):
     
     GENDER_OPTIONS = [
@@ -27,6 +30,9 @@ class Employee(models.Model):
     address = models.CharField(max_length=100, null= True ,default="N/A")
     email = models.CharField()
 
+    def __str__(self):
+        return f'{self.firstname} {self.lastname} (#{self.pk})'
+
 class Land(models.Model):
     STATUS_OPTIONS = [
         ("T", "TAKEN"),
@@ -39,6 +45,9 @@ class Land(models.Model):
     land_type = models.CharField(max_length=30)
   
 
+    def __str__(self):
+        return f'{self.name} (#{self.pk})'
+
 class Building(models.Model):
     STATUS_OPTIONS = [
         ("T", "TAKEN"),
@@ -48,9 +57,15 @@ class Building(models.Model):
     location = models.CharField(max_length=50)
     status = models.CharField(max_length = 2, choices = STATUS_OPTIONS)
 
+    def __str__(self):
+        return f'{self.name} (#{self.pk})'
+
 class Lease(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Lease #{self.pk} - {self.client}'
 
 class Payment(models.Model):
     MODE_OF_PAYEMENT = [
@@ -70,3 +85,5 @@ class Payment(models.Model):
     
 
     
+    def __str__(self):
+        return f'Payment #{self.pk} - {self.client}'
