@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ heading }}{% endblock %}
+{% block page_title %}{{ heading }}{% endblock %}
+
+{% block actions %}
+  <button type="button" class="btn btn-primary btn-lg" data-modal="{{ add_url }}"><i class="ph ph-plus" aria-hidden="true"></i>{{ add_label }}</button>
+{% endblock %}
+
+{% block content %}
+  <section class="card">
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>{% block thead %}{% endblock %}<th scope="col" class="col-actions" aria-label="Actions"></th></tr>
+        </thead>
+        <tbody>
+          {% block rows %}{% endblock %}
+          {% if not object_list %}
+            <tr><td class="table-empty" colspan="20">Nothing here yet. Use the button above to add the first one.</td></tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+{% endblock %}

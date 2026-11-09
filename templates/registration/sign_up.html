@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Create account{% endblock %}
+{% block body_class %}auth{% endblock %}
+
+{% block shell %}
+  <main class="auth-card">
+    <svg class="brand-logo" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+      <rect width="40" height="40" rx="10" fill="#291C0E"/>
+      <path d="M8 19 20 9l12 10v12H8z" fill="#A78D78"/>
+      <path d="M17 31v-8h6v8z" fill="#291C0E"/>
+    </svg>
+    <h1 class="auth-title">Create an account</h1>
+    <p class="auth-sub">Pick a username and password to get started</p>
+
+    <form method="post" class="auth-form">
+      {% csrf_token %}
+      {% include "partials/_fields.html" %}
+      <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+    </form>
+    <p class="auth-alt">Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+  </main>
+{% endblock %}
