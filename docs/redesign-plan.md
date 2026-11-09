@@ -71,7 +71,7 @@ two links to one folder). Point at a link and you know where its code lives.
 ### Mental model C: "Every list page is the same page"
 
 ```text
-List page  = heading + "Add" button + search box + table (Edit / Delete on each row)
+List page  = heading + "Add" button + table (Edit / Delete on each row)
 Add / Edit = a modal containing the form (one shared template for all apps)
 Delete     = a small "Are you sure?" modal (one shared template)
 ```
@@ -282,7 +282,7 @@ sequenceDiagram
     U->>B: Click "Clients" in the top nav
     B->>URL: GET /clients/
     URL->>V: client_list
-    V->>M: Client.objects (search)
+    V->>M: Client.objects
     M-->>V: rows
     V->>T: render clients/client_list.html
     T-->>B: nav + table
@@ -351,7 +351,7 @@ stay recognisable. SACCO does the same with its rust colour.
 ### What is the same as SACCO
 
 Floating rail sidebar with brand, nav list, Django Admin link and log out; top bar with page title and one primary
-"Add" button; list pages are one card with a search box and a table with sticky edit/delete icons; stat cards with
+"Add" button; list pages are one card with a table with sticky edit/delete icons; stat cards with
 raised icon tiles; "Recent" tables on the dashboard; modal forms and confirm modals; toasts for messages;
 login page on a deep-teal background; the rail collapses to a top bar on phones.
 
@@ -364,7 +364,7 @@ login page on a deep-teal background; the rail collapses to a top bar on phones.
 | Logo | PNG | small inline SVG house mark |
 | Sidebar items | Members, Staff, Accounts... | Overview, Clients, Employees, Land, Buildings, Leases, Payments |
 | Analytics page | yes | no (stat cards and recent tables only) |
-| Pagination | yes | no (search only) |
+| Pagination and search | yes | no |
 
 ### Implementation notes
 
@@ -434,7 +434,7 @@ RealEstate-Management-System/
 |---|---|---|
 | 0 | Branch `redesign/dashboard-ui` | Created |
 | 1 | `site.css`, `site.js`, `base.html` with the dialog, nav, shared modal templates, login and sign-up restyled | Login and sign-up render in the new style |
-| 2 | `clients` app: model, form, views, urls, list page | Add, edit, delete in modals, plus search, all work |
+| 2 | `clients` app: model, form, views, urls, list page | Add, edit, delete in modals all work |
 | 3 | `employees` app (copy of step 2) | Same |
 | 4 | `properties` app: Land and Building | Both lists work |
 | 5 | `leases` app with the "land or building" check | A lease saves only with exactly one of them |

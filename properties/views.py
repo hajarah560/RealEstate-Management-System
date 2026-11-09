@@ -4,22 +4,17 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from core.search import search
-
 from .forms import LandForm, BuildingForm
 from .models import Land, Building
 
 
-# READ: list the lands, with search
+# READ: list the lands
 @login_required
 def land_list(request):
     lands = Land.objects.order_by("-id")
-    q = request.GET.get("q", "").strip()
-    lands = search(lands, q, ["name", "location", "land_type", "land_size"])
 
     context = {
         "object_list": lands,
-        "q": q,
         "heading": "Land",
         "add_label": "Add land",
         "add_url": reverse("land_add"),
@@ -76,16 +71,13 @@ def land_delete(request, pk):
     return render(request, "shared/modal_confirm.html", context)
 
 
-# READ: list the buildings, with search
+# READ: list the buildings
 @login_required
 def building_list(request):
     buildings = Building.objects.order_by("-id")
-    q = request.GET.get("q", "").strip()
-    buildings = search(buildings, q, ["name", "location"])
 
     context = {
         "object_list": buildings,
-        "q": q,
         "heading": "Buildings",
         "add_label": "Add building",
         "add_url": reverse("building_add"),

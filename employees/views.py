@@ -4,22 +4,17 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from core.search import search
-
 from .forms import EmployeeForm
 from .models import Employee
 
 
-# READ: list the employees, with search
+# READ: list the employees
 @login_required
 def employee_list(request):
     employees = Employee.objects.order_by("-id")
-    q = request.GET.get("q", "").strip()
-    employees = search(employees, q, ["first_name", "last_name", "contact", "email", "address"])
 
     context = {
         "object_list": employees,
-        "q": q,
         "heading": "Employees",
         "add_label": "Add employee",
         "add_url": reverse("employee_add"),
