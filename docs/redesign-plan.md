@@ -334,19 +334,19 @@ for the modal (GET) and handle the submit (POST); they are not full pages.
 > modals and toasts. Only two things are different: the **palette** and the **icon set**.
 > The stylesheet is still written fresh for this project.
 
-### Palette (given)
+### Palette (given, from the reference image)
 
 | Token | Hex | Used for |
 |---|---|---|
-| `--deep` | `#055b65` | sidebar, tiles, headings, links |
-| `--mid` | `#45828b` | secondary tiles, muted text (darkened where contrast needs it) |
-| `--mint` | `#1bd488` | primary buttons, current page in the sidebar, "Available" tags |
-| `--sage` | `#b2c9c5` | lines and borders |
-| `--mist` | `#e0e5e9` | page background |
+| `--espresso` | `#291C0E` | sidebar, text, login background |
+| `--umber` | `#6E473B` | secondary tiles, muted text (darkened where contrast needs it) |
+| `--tan` | `#A78D78` | primary buttons, current page in the sidebar, "Available" tags |
+| `--stone` | `#BEB5A9` | lines and borders |
+| `--cream` | `#E1D4C2` | page background |
 
-Everything else is mixed from these five: near-black teal ink for text, a near-white card tint, hover shades.
+Everything else is mixed from these five: a near-white card tint and hover shades.
 **One exception:** a muted red `#b3392f` for delete buttons and error messages only, so destructive actions
-stay recognisable. SACCO does the same with its rust colour.
+stay recognisable.
 
 ### What is the same as SACCO
 
@@ -359,7 +359,7 @@ login page on a deep-teal background; the rail collapses to a top bar on phones.
 
 | Aspect | SACCO | Estate Desk |
 |---|---|---|
-| Colours | navy, beige, amber, rust | the five teal / mint colours above |
+| Colours | navy, beige, amber, rust | the five brown and cream colours above |
 | Icons | Lucide | **Phosphor Icons** (regular weight, CDN web font) |
 | Logo | PNG | small inline SVG house mark |
 | Sidebar items | Members, Staff, Accounts... | Overview, Clients, Employees, Land, Buildings, Leases, Payments |
