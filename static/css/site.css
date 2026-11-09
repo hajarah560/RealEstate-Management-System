@@ -19,13 +19,19 @@
 
   --radius: 12px;
   --radius-control: 8px;
-  --font: "Roboto", system-ui, "Segoe UI", sans-serif;
+  --font: "IBM Plex Sans", system-ui, "Segoe UI", sans-serif;
+  --font-size: 15px;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
   --shadow-card: 0 1px 3px rgb(41 28 14 / 0.08), 0 8px 20px -10px rgb(41 28 14 / 0.18);
   --shadow-raised: 0 14px 30px -12px rgb(41 28 14 / 0.5), 0 4px 10px -4px rgb(41 28 14 / 0.3);
   --shadow-modal: 0 24px 48px -12px rgb(41 28 14 / 0.45), 0 8px 16px -8px rgb(41 28 14 / 0.25);
 }
+
+/* Typeface: change data-font on <html> in base.html to humanist, business or playful. */
+html[data-font="humanist"] { --font: "Source Sans 3", system-ui, "Segoe UI", sans-serif; --font-size: 16px; }
+html[data-font="business"] { --font: "IBM Plex Sans", system-ui, "Segoe UI", sans-serif; --font-size: 15px; }
+html[data-font="playful"] { --font: "Nunito", system-ui, "Segoe UI", sans-serif; --font-size: 15px; }
 
 /* Base and browser surfaces */
 
@@ -38,7 +44,7 @@ body {
   min-height: 100vh;
   background: var(--cream);
   color: var(--ink);
-  font: 400 15px/1.5 var(--font);
+  font: 400 var(--font-size)/1.5 var(--font);
   -webkit-font-smoothing: antialiased;
 }
 

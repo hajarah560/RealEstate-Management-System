@@ -371,7 +371,7 @@ login page on a deep-teal background; the rail collapses to a top bar on phones.
 | Piece | Approach |
 |---|---|
 | CSS | One hand-written `static/css/site.css`, tokens as CSS variables |
-| Font | Roboto (Google Fonts), as in SACCO |
+| Font | Three candidates loaded from Google Fonts, switched by `data-font` on `<html>` in `base.html`: Source Sans 3 (humanist), IBM Plex Sans (business, current default), Nunito (playful). None is Roboto. |
 | Icons | Phosphor via CDN `<link>`, no download |
 | JavaScript | `static/js/site.js` (about 25 lines): open the `<dialog>`, fetch the fragment, submit by fetch, reload on success |
 
