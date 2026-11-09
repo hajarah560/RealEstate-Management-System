@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}{{ heading }}{% endblock %}
+
+{% block content %}
+  <div class="page-head">
+    <h1>{{ heading }}</h1>
+    <button type="button" class="btn btn-add" data-modal="{{ add_url }}"><i class="bi bi-plus-lg"></i> {{ add_label }}</button>
+  </div>
+
+  <form class="search" method="get">
+    <input type="search" name="q" value="{{ q }}" placeholder="Search {{ heading|lower }}" aria-label="Search">
+    <button class="btn" type="submit">Search</button>
+    {% if q %}<a href="?">Clear</a>{% endif %}
+  </form>
+
+  {% if object_list %}
+    <div class="table-wrap">
+      <table>
+        <thead><tr>{% block thead %}{% endblock %}<th></th></tr></thead>
+        <tbody>{% block rows %}{% endblock %}</tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">{% if q %}Nothing matches "{{ q }}".{% else %}Nothing here yet. Use the button above to add the first one.{% endif %}</p>
+  {% endif %}
+{% endblock %}

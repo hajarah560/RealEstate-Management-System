@@ -1,0 +1,15 @@
+<div class="modal-title danger">
+  <h2 id="modal-title">{{ title }}</h2>
+  <button type="button" class="modal-close" data-close aria-label="Close"><i class="bi bi-x-lg"></i></button>
+</div>
+<form method="post" action="{{ action }}">
+  {% csrf_token %}
+  <div class="modal-body">
+    {% if error %}<div class="form-error" role="alert">{{ error }}</div>{% endif %}
+    <p>Are you sure you want to delete <strong>{{ object }}</strong>? This cannot be undone.</p>
+  </div>
+  <div class="modal-foot">
+    <button type="button" class="btn" data-close>Cancel</button>
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </div>
+</form>
