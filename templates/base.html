@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=Source+Sans+3:wght@400;500;700&family=Nunito:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+    <link rel="stylesheet" href="{% static 'css/site.css' %}?v=4">
   </head>
   <body class="{% block body_class %}{% endblock %}">
     {% block shell %}
@@ -39,6 +39,6 @@
     {% endif %}
 
     <dialog id="modal" class="modal" aria-labelledby="modal-title"></dialog>
-    <script src="{% static 'js/site.js' %}" defer></script>
+    <script src="{% static 'js/site.js' %}?v=4" defer></script>
   </body>
 </html>
