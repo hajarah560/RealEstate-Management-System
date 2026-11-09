@@ -2,7 +2,7 @@
 
 > Branch: `redesign/dashboard-ui` (all work and pushes stay here; nothing goes to `main`)
 > Content source: `real-estate-frontend/` (the original HTML pages)
-> Design: **its own identity**, deliberately unlike the SACCO project (see section 9)
+> Design: SACCO layout and feel with our own palette and icons (see section 9)
 > Scope: a simple class project. **No over-engineering.**
 
 ---
@@ -327,109 +327,53 @@ for the modal (GET) and handle the submit (POST); they are not full pages.
 
 ---
 
-## 9. Design identity: totally distinct from SACCO
+## 9. Design: SACCO's look and feel, our own palette and icons
 
-The SACCO app is: a floating **dark navy sidebar**, **warm beige "paper"** cards, an **amber/rust** accent, the
-**Roboto** font, **Lucide** icons, big rounded corners, and raised icon tiles. Our app deliberately uses the
-opposite on every axis, and **copies no file from SACCO** (no CSS, JS, templates, logo, or template tag).
-Modals are required here, so we keep the idea but make ours look and be built differently (see the Modals row
-and the Modal design box below).
+> **Update (supersedes the earlier "totally distinct" direction).** The layout and feel now follow the SACCO
+> app: a floating left sidebar, white cards, raised icon tiles on the stat cards, uppercase table headings,
+> modals and toasts. Only two things are different: the **palette** and the **icon set**.
+> The stylesheet is still written fresh for this project.
 
-### Side-by-side
-
-| Aspect | SACCO (do **not** use) | Real Estate (ours) |
-|---|---|---|
-| Navigation | Floating dark left sidebar | **Horizontal top bar**, white, with a thin bottom line; collapses to a scrollable row on phones |
-| Page background | Warm beige `#EEE9DF` | **Cool light grey-green** `#F3F6F5` |
-| Cards | Warm paper, 14px radius, soft look | **Plain white, 4px radius, 1px hairline border, no shadow** |
-| Primary color | Navy `#1B2632` | **Deep forest green** `#14532D` |
-| Accent | Amber `#F2A55C` and rust `#A35139` | **Brick red** `#B4452C` for actions that matter (Add), **gold** `#C99A2E` for highlights |
-| Text | Dark slate | **Near-black green-ink** `#16221B`, muted `#5E6B63` |
-| Font | Roboto | **Lora** (serif) for headings, **Inter** for body and tables |
-| Icons | Lucide, in raised rounded tiles | **Bootstrap Icons**, plain inline, no tile |
-| Stat cards | Icon tile + label + number | **Number-first card with a thick coloured left edge**, no icon |
-| Modals | Soft rounded card, centered, white header | **Square-cornered dialog with a solid forest-green title bar and white title text, a gold bottom rule on the bar, and a dimmed green-tinted backdrop**; buttons right-aligned in a grey footer strip |
-| Form fields | Rounded filled inputs | **Underlined-style inputs, labels above in small bold text, two columns on desktop** |
-| Tables | Soft rows, uppercase tiny heads | **Zebra rows, bold sentence-case heads, sticky header**, status shown as outlined text badges |
-| Delete | Confirm modal | **Small confirm modal with a brick-red title bar** and the record's name spelled out |
-| Feedback | Toasts | **Banner strip** under the nav |
-
-### Palette (our tokens)
+### Palette (given)
 
 | Token | Hex | Used for |
 |---|---|---|
-| `--bg` | `#F3F6F5` | page background |
-| `--surface` | `#FFFFFF` | cards, tables, nav |
-| `--line` | `#D9E1DC` | borders |
-| `--ink` | `#16221B` | main text |
-| `--muted` | `#5E6B63` | secondary text |
-| `--primary` | `#14532D` | nav highlight, headings, primary buttons |
-| `--primary-soft` | `#E4EFE8` | hover and zebra rows |
-| `--accent` | `#B4452C` | "Add" button, delete, errors |
-| `--gold` | `#C99A2E` | feature stat card edge |
+| `--deep` | `#055b65` | sidebar, tiles, headings, links |
+| `--mid` | `#45828b` | secondary tiles, muted text (darkened where contrast needs it) |
+| `--mint` | `#1bd488` | primary buttons, current page in the sidebar, "Available" tags |
+| `--sage` | `#b2c9c5` | lines and borders |
+| `--mist` | `#e0e5e9` | page background |
 
-Stat-card edges cycle through `--primary`, `--gold`, `--accent`, and one neutral slate `#3D5A6C`.
-(Contrast: `--ink` and `--primary` on white both pass WCAG AA; check `--gold` is used only as a border or on dark text, never as text on white.)
+Everything else is mixed from these five: near-black teal ink for text, a near-white card tint, hover shades.
+**One exception:** a muted red `#b3392f` for delete buttons and error messages only, so destructive actions
+stay recognisable. SACCO does the same with its rust colour.
 
-### Layout sketch
+### What is the same as SACCO
 
-```text
-+----------------------------------------------------------------------+
-|  [logo] ESTATE DESK   Overview Clients Employees Land Buildings      |
-|                       Leases Payments                    user | Logout |
-+----------------------------------------------------------------------+
-|  (banner message, only when there is one)                            |
-|                                                                      |
-|  Overview                                                            |
-|  +-------------+ +-------------+ +-------------+                     |
-|  |▌ 24         | |▌ 8          | |▌ 12         |   thick left edge   |
-|  |  Clients    | |  Employees  | |  Free land  |   = the colour      |
-|  +-------------+ +-------------+ +-------------+                     |
-|  +-------------+ +-------------+ +-----------------+                 |
-|  |▌ 9 Free     | |▌ 15 Active  | |▌ UGX 48,000,000 |                 |
-|  |  buildings  | |  leases     | |  Payments in    |                 |
-|  +-------------+ +-------------+ +-----------------+                 |
-|                                                                      |
-|  Recent payments (5)              Recent leases (5)                  |
-|  | table |                        | table |                          |
-|                                                                      |
-|  footer: Django Admin                                                |
-+----------------------------------------------------------------------+
-```
+Floating rail sidebar with brand, nav list, Django Admin link and log out; top bar with page title and one primary
+"Add" button; list pages are one card with a search box and a table with sticky edit/delete icons; stat cards with
+raised icon tiles; "Recent" tables on the dashboard; modal forms and confirm modals; toasts for messages;
+login page on a deep-teal background; the rail collapses to a top bar on phones.
 
-### Modal design
+### What is different
 
-```text
-+--------------------------------------------+
-| Add client                              ✕  |  <- solid green bar, white text
-+============================================+  <- thin gold rule
-|  First name          Last name             |
-|  ________________    ________________      |
-|  Gender              Contact               |
-|  ________________    ________________      |
-|  Email                                     |
-|  ________________________________________  |
-+--------------------------------------------+
-|                     [Cancel]  [ Save ]     |  <- grey footer strip
-+--------------------------------------------+
-```
+| Aspect | SACCO | Estate Desk |
+|---|---|---|
+| Colours | navy, beige, amber, rust | the five teal / mint colours above |
+| Icons | Lucide | **Phosphor Icons** (regular weight, CDN web font) |
+| Logo | PNG | small inline SVG house mark |
+| Sidebar items | Members, Staff, Accounts... | Overview, Clients, Employees, Land, Buildings, Leases, Payments |
+| Analytics page | yes | no (stat cards and recent tables only) |
+| Pagination | yes | no (search only) |
 
-Built on the native HTML `<dialog>` element (one per page, in `base.html`), so Esc and focus handling come free.
-
-### Brand name and logo
-
-Working name **Estate Desk** (change freely). Logo is a simple text wordmark in Lora with a small Bootstrap Icons
-`house-door-fill` glyph. No image file needed.
-
-### Implementation notes for the style
+### Implementation notes
 
 | Piece | Approach |
 |---|---|
-| CSS | One hand-written `static/css/site.css` (about 200 to 300 lines), tokens as CSS variables. **Written fresh.** |
-| Fonts | Google Fonts link for Lora and Inter. |
-| Icons | Bootstrap Icons via CDN `<link>`, no download. |
-| JavaScript | One hand-written `static/js/site.js` (about 40 lines, no libraries): open the dialog, fetch the fragment, submit the form by fetch, reload on success. **Written fresh**, not adapted from SACCO's `modal.js`. |
-| Bootstrap 4 + crispy-forms | **Removed.** The new CSS styles the forms directly, and each field is rendered by a small shared form template. |
+| CSS | One hand-written `static/css/site.css`, tokens as CSS variables |
+| Font | Roboto (Google Fonts), as in SACCO |
+| Icons | Phosphor via CDN `<link>`, no download |
+| JavaScript | `static/js/site.js` (about 25 lines): open the `<dialog>`, fetch the fragment, submit by fetch, reload on success |
 
 ---
 
