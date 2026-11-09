@@ -1,0 +1,19 @@
+{% extends "shared/list_base.html" %}
+
+{% block thead %}
+  <th>Name</th><th>Gender</th><th>Contact</th><th>Email</th><th>Address</th>
+{% endblock %}
+
+{% block rows %}
+  {% for o in object_list %}
+    <tr>
+      <td>{{ o.first_name }} {{ o.last_name }}</td>
+      <td>{{ o.get_gender_display }}</td>
+      <td>{{ o.contact }}</td>
+      <td>{{ o.email }}</td>
+      <td>{{ o.address|default:"-" }}</td>
+      {% url 'employee_edit' o.pk as edit_url %}{% url 'employee_delete' o.pk as delete_url %}
+      {% include "partials/_table_actions.html" %}
+    </tr>
+  {% endfor %}
+{% endblock %}
