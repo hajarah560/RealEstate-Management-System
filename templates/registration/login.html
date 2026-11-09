@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Log in{% endblock %}
+
+{% block content %}
+  <div class="auth">
+    <h1>Estate Desk</h1>
+    <p class="help">Log in to manage clients, properties, leases and payments.</p>
+    <form method="post">
+      {% csrf_token %}
+      {% include "partials/_fields.html" %}
+      {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+      <button type="submit" class="btn btn-primary">Log in</button>
+    </form>
+    <p class="auth-alt">New here? <a href="{% url 'sign_up' %}">Create an account</a></p>
+  </div>
+{% endblock %}
