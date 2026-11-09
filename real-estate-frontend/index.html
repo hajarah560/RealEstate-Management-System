@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+
+
+    <script>
+        function loginAccess() {
+            var username = document.querySelector("#username").value;
+            var password = document.querySelector("#password").value;
+
+            if (username == "" || password == "") {
+                alert("Please enter both your username and password.");
+                return;
+            }
+            else {
+                alert("YOU SUCCESSFULLY LOGGED IN " + username);
+            }
+            //  Go to the home page after the user dismisses the alert.
+             window.location.href = "home.html";
+        };
+    </script>
+
+</head>
+
+<body class="body">
+
+    <div class="login-container">
+        <div class="image">
+            <img src="images/pexels-artbovich-7031581.jpg" width="100px" height="100px" alt="login image" class="image">
+        </div>
+
+        <div class="inputing-btns">
+            <p class="input-btn">
+                <input type="text" id="username" name="username" placeholder="Enter username">
+            </p>
+
+            <p class="input-btn">
+                <input type="password" id="password" name="password" placeholder="Enter password">
+            </p>
+
+            <p class="bt">
+                <button type="button" id="btn" onclick="loginAccess()">LOGIN</button>
+            </p>
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

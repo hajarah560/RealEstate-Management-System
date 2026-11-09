@@ -1,0 +1,83 @@
+
+.body{
+    background-color: rgb(238, 206, 165);
+
+
+}
+
+.image{
+   padding-right: 80px;
+
+}
+
+.navigation-bar{
+    padding: 15px;
+    border: 1px solid;
+    background-color: rgb(252, 230, 188);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    text-decoration-color: black;
+}
+
+
+.navigation-bar a{
+    color: rgb(11, 11, 11);
+    text-decoration: none;
+    border: 1px solid black ;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: rgb(254, 174, 93);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.navigation-bar a.active{
+    background-color: rgb(240, 204, 164);
+}
+
+table, th, td{ 
+    border: solid 1px;
+    border-collapse: collapse;
+    background-color:rgb(251, 220, 193);
+    padding: 3px;
+}
+
+.welcome-msg{
+    width: 500px;
+}
+
+.form1{
+    display: flex;
+    gap: 25px;
+}
+
+.form2{
+    display: flex;
+    gap: 45px;
+}
+
+.form3{
+    display: flex;
+    gap: 65px;
+}
+
+
+.form5{
+    display: flex;
+    gap: 70px;
+}
+
+
+.form6{
+    display: flex;
+    gap: 10px;
+}
+
+
+
+
+
+
+
+

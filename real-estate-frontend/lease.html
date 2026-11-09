@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+
+
+      <script>
+        function LeaseRegister() {
+            var lease = document.querySelector("#lease").value;
+            var Client = document.querySelector("#clientName").value;
+            var emp = document.querySelector("#emp_id").value;
+            var property = document.querySelector("#property_id").value;
+
+            if ( lease == "" || Client == "" || emp == ""
+                || property == "" ) {
+                alert("⚠️ALL DETAILS REQUIRED");
+                return;
+            }
+            else {
+                alert("YOU HAVE SUCCESSFULLY REGISTERED LEASE");
+            }
+        };
+
+    </script>
+</head>
+
+<body class="body">
+    <nav class="navigation-bar">
+        <a href="home.html">Home</a>
+        <a href="employee.html">Employee</a>
+        <a href="client.html">Client</a>
+        <a href="property.html">Properties</a>
+        <a href="payment.html">Payments</a>
+        <a href="lease.html" class="active">Lease</a>
+    </nav>
+
+    <form>
+
+        <label>leaseid</label>
+        <input type="text" id="lease" name="clientName" placeholder="Enter Lease id">
+        <br><br>
+
+         <label>Clientid</label>
+        <input type="text" id="clientName" name="clientName" placeholder="Enter Clientod">
+        <br><br>
+
+        <label>employee_id</label>
+        <input type="text" id="emp_id" name="empName" placeholder="Enter Employeeid">
+        <br><br>
+
+        <label>property_id</label>
+        <input type="text" id="property_id" name="phone" placeholder="Enter Propertyid">
+        <br><br>
+    </form>
+
+    <button id="btn" type="submit" onclick="LeaseRegister()">SUBMIT</button>
+
+
+    <h2>LEASE TABLE</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>LeaseID</th>
+                <th>ClientID</th>
+                <th>PropertyID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>L001</td>
+                <td>C001</td>
+                <td>P001</td>
+            </tr>
+            <tr>
+                <td>L002</td>
+                <td>C002</td>
+                <td>P003</td>
+            </tr>
+            <tr>
+                <td>L003</td>
+                <td>C001</td>
+                <td>P001</td>
+            </tr>
+            <tr>
+                <td>L004</td>
+                <td>C001</td>
+                <td>P001</td>
+            </tr>
+            <tr>
+                <td>L005</td>
+                <td>C002</td>
+                <td>P004</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

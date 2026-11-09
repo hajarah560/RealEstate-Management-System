@@ -34,13 +34,22 @@ class RecordViewsTests(TestCase):
                 self.assertContains(self.client.get(page), edit)
                 self.assertEqual(self.client.get(edit).status_code, 200)
                 updated = dict(data, **{field: value})
-                self.assertRedirects(self.client.post(edit, updated), page)
+                response = self.client.post(edit, updated)
+                self.assertContains(response, 'Changes saved successfully.')
                 record.refresh_from_db()
                 self.assertEqual(getattr(record, field + '_id' if field == 'employee' else field), value)
                 self.assertEqual(self.client.get(delete).status_code, 200)
                 self.assertTrue(model.objects.filter(pk=record.pk).exists())
                 self.assertRedirects(self.client.post(delete), page)
                 self.assertFalse(model.objects.filter(pk=record.pk).exists())
+
+    def test_invalid_edit_shows_message_and_keeps_record(self):
+        edit = reverse('edit_client_page', args=[self.client_record.pk])
+        response = self.client.post(edit, {})
+        self.assertContains(response, 'Form has invalid data.')
+        self.assertTrue(response.context['form'].errors)
+        self.client_record.refresh_from_db()
+        self.assertEqual(self.client_record.firstname, 'Jane')
 
     def test_invalid_payment_keeps_form_errors(self):
         response = self.client.post(reverse('payment_page'), {})
