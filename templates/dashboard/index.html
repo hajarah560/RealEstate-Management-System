@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load estate %}
+
+{% block title %}Overview{% endblock %}
+{% block page_title %}Overview{% endblock %}
+
+{% block content %}
+  <section class="stats" aria-label="Estate Desk at a glance">
+    <article class="card stat">
+      <div class="stat-top">
+        <span class="stat-tile stat-tile-tan"><i class="ph ph-users-three" aria-hidden="true"></i></span>
+        <p class="stat-label">Clients</p>
+      </div>
+      <p class="stat-value">{{ clients }}</p>
+      <p class="stat-caption">Renting or buying with us</p>
+    </article>
+
+    <article class="card stat">
+      <div class="stat-top">
+        <span class="stat-tile stat-tile-espresso"><i class="ph ph-identification-badge" aria-hidden="true"></i></span>
+        <p class="stat-label">Employees</p>
+      </div>
+      <p class="stat-value">{{ employees }}</p>
+      <p class="stat-caption">Handling the deals</p>
+    </article>
+
+    <article class="card stat">
+      <div class="stat-top">
+        <span class="stat-tile stat-tile-umber"><i class="ph ph-map-trifold" aria-hidden="true"></i></span>
+        <p class="stat-label">Available land</p>
+      </div>
+      <p class="stat-value">{{ free_land }}</p>
+      <p class="stat-caption">Plots open for a lease</p>
+    </article>
+
+    <article class="card stat">
+      <div class="stat-top">
+        <span class="stat-tile stat-tile-tan"><i class="ph ph-buildings" aria-hidden="true"></i></span>
+        <p class="stat-label">Available buildings</p>
+      </div>
+      <p class="stat-value">{{ free_buildings }}</p>
+      <p class="stat-caption">Buildings open for a lease</p>
+    </article>
+
+    <article class="card stat">
+      <div class="stat-top">
+        <span class="stat-tile stat-tile-espresso"><i class="ph ph-handshake" aria-hidden="true"></i></span>
+        <p class="stat-label">Active leases</p>
+      </div>
+      <p class="stat-value">{{ active_leases }}</p>
+      <p class="stat-caption">End date not yet reached</p>
+    </article>
+
+    <article class="card stat stat-feature">
+      <div class="stat-top">
+        <span class="stat-tile stat-tile-umber"><i class="ph ph-receipt" aria-hidden="true"></i></span>
+        <p class="stat-label">Payments received</p>
+      </div>
+      <p class="stat-value">{{ payments_total|money }}</p>
+      <p class="stat-caption">Across all leases</p>
+    </article>
+  </section>
+
+  <div class="recent">
+    <section class="card" aria-labelledby="recent-payments-title">
+      <header class="card-header">
+        <h2 class="card-title" id="recent-payments-title">Recent payments</h2>
+        <a class="card-link" href="{% url 'payment_list' %}" aria-label="View all payments">View all<i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+      </header>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr><th scope="col">Client</th><th scope="col">Date</th><th scope="col" class="num">Amount</th></tr>
+          </thead>
+          <tbody>
+            {% for p in recent_payments %}
+              <tr><td>{{ p.lease.client }}</td><td>{{ p.date|date:"d M Y" }}</td><td class="num">{{ p.amount|money }}</td></tr>
+            {% empty %}
+              <tr><td class="table-empty" colspan="3">No payments yet.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="recent-leases-title">
+      <header class="card-header">
+        <h2 class="card-title" id="recent-leases-title">Recent leases</h2>
+        <a class="card-link" href="{% url 'lease_list' %}" aria-label="View all leases">View all<i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+      </header>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr><th scope="col">Client</th><th scope="col">Property</th><th scope="col">Ends</th></tr>
+          </thead>
+          <tbody>
+            {% for l in recent_leases %}
+              <tr><td>{{ l.client }}</td><td>{{ l.property_name }}</td><td>{{ l.end_date|date:"d M Y" }}</td></tr>
+            {% empty %}
+              <tr><td class="table-empty" colspan="3">No leases yet.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+{% endblock %}
