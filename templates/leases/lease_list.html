@@ -1,0 +1,20 @@
+{% extends "shared/list_base.html" %}
+
+{% block thead %}
+  <th>#</th><th>Client</th><th>Property</th><th>Employee</th><th>Start</th><th>End</th>
+{% endblock %}
+
+{% block rows %}
+  {% for o in object_list %}
+    <tr>
+      <td>{{ o.pk }}</td>
+      <td>{{ o.client }}</td>
+      <td>{{ o.property_name }} <small>({% if o.land %}Land{% else %}Building{% endif %})</small></td>
+      <td>{{ o.employee|default:"-" }}</td>
+      <td>{{ o.start_date|date:"d M Y" }}</td>
+      <td>{{ o.end_date|date:"d M Y" }}</td>
+      {% url 'lease_edit' o.pk as edit_url %}{% url 'lease_delete' o.pk as delete_url %}
+      {% include "partials/_table_actions.html" %}
+    </tr>
+  {% endfor %}
+{% endblock %}
