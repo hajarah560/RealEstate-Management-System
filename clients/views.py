@@ -4,22 +4,17 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from core.search import search
-
 from .forms import ClientForm
 from .models import Client
 
 
-# READ: list the clients, with search
+# READ: list the clients
 @login_required
 def client_list(request):
     clients = Client.objects.order_by("-id")
-    q = request.GET.get("q", "").strip()
-    clients = search(clients, q, ["first_name", "last_name", "contact", "email", "address"])
 
     context = {
         "object_list": clients,
-        "q": q,
         "heading": "Clients",
         "add_label": "Add client",
         "add_url": reverse("client_add"),

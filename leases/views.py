@@ -4,22 +4,17 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from core.search import search
-
 from .forms import LeaseForm
 from .models import Lease
 
 
-# READ: list the leases, with search
+# READ: list the leases
 @login_required
 def lease_list(request):
     leases = Lease.objects.select_related("client", "employee", "land", "building").order_by("-id")
-    q = request.GET.get("q", "").strip()
-    leases = search(leases, q, ["client__first_name", "client__last_name", "land__name", "building__name"])
 
     context = {
         "object_list": leases,
-        "q": q,
         "heading": "Leases",
         "add_label": "Add lease",
         "add_url": reverse("lease_add"),

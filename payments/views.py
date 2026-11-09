@@ -4,22 +4,17 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from core.search import search
-
 from .forms import PaymentForm
 from .models import Payment
 
 
-# READ: list the payments, with search
+# READ: list the payments
 @login_required
 def payment_list(request):
     payments = Payment.objects.select_related("lease__client", "employee").order_by("-id")
-    q = request.GET.get("q", "").strip()
-    payments = search(payments, q, ["lease__client__first_name", "lease__client__last_name", "mode"])
 
     context = {
         "object_list": payments,
-        "q": q,
         "heading": "Payments",
         "add_label": "Add payment",
         "add_url": reverse("payment_add"),

@@ -22,6 +22,6 @@ Open http://127.0.0.1:8000/sign_up/ to create a user, then log in.
 | `properties` | Land, Building |
 | `leases` | Lease (client + land or building) |
 | `payments` | Payment (against a lease) |
-| `core` | Sign-up view, search helper, money filter |
+| `core` | Sign-up view, money filter |
 
 The full plan is in `docs/redesign-plan.md`.
