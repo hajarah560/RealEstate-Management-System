@@ -19,19 +19,17 @@
 
   --radius: 12px;
   --radius-control: 8px;
-  --font: "IBM Plex Sans", system-ui, "Segoe UI", sans-serif;
-  --font-size: 15px;
+  /* Three typefaces, three jobs */
+  --font-display: "Nunito", system-ui, "Segoe UI", sans-serif;          /* titles and brand */
+  --font: "Source Sans 3", system-ui, "Segoe UI", sans-serif;           /* body, navigation, buttons, forms */
+  --font-data: "IBM Plex Sans", system-ui, "Segoe UI", sans-serif;      /* tables, numbers, tags */
+  --font-size: 16px;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
   --shadow-card: 0 1px 3px rgb(41 28 14 / 0.08), 0 8px 20px -10px rgb(41 28 14 / 0.18);
   --shadow-raised: 0 14px 30px -12px rgb(41 28 14 / 0.5), 0 4px 10px -4px rgb(41 28 14 / 0.3);
   --shadow-modal: 0 24px 48px -12px rgb(41 28 14 / 0.45), 0 8px 16px -8px rgb(41 28 14 / 0.25);
 }
-
-/* Typeface: change data-font on <html> in base.html to humanist, business or playful. */
-html[data-font="humanist"] { --font: "Source Sans 3", system-ui, "Segoe UI", sans-serif; --font-size: 16px; }
-html[data-font="business"] { --font: "IBM Plex Sans", system-ui, "Segoe UI", sans-serif; --font-size: 15px; }
-html[data-font="playful"] { --font: "Nunito", system-ui, "Segoe UI", sans-serif; --font-size: 15px; }
 
 /* Base and browser surfaces */
 
@@ -84,7 +82,7 @@ input, select, textarea { caret-color: var(--espresso); }
   margin: 4px 0 24px;
 }
 
-.page-title { margin: 0; font-size: 24px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; }
+.page-title { margin: 0; font-size: 24px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em;  font-family: var(--font-display); }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
 /* Sidebar */
@@ -119,7 +117,7 @@ input, select, textarea { caret-color: var(--espresso); }
 
 .brand-logo { display: block; width: 40px; height: 40px; flex: none; }
 
-.brand-text { display: flex; flex-direction: column; font-size: 17px; font-weight: 700; letter-spacing: 0.02em; line-height: 1.2; }
+.brand-text { display: flex; flex-direction: column; font-size: 17px; font-weight: 700; letter-spacing: 0.02em; line-height: 1.2;  font-family: var(--font-display); }
 .brand-text small { color: var(--stone); font-size: 12px; font-weight: 400; letter-spacing: 0.02em; }
 
 .nav { display: flex; flex: 1; flex-direction: column; gap: 2px; }
@@ -164,13 +162,13 @@ input, select, textarea { caret-color: var(--espresso); }
 
 .card + .card { margin-top: 24px; }
 .card-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 20px 12px; }
-.card-title { margin: 0; font-size: 16px; font-weight: 500; }
+.card-title { margin: 0; font-size: 16px; font-weight: 700;  font-family: var(--font-display); }
 
 /* Tables */
 
 .table-wrap { overflow-x: auto; overscroll-behavior-x: contain; }
 
-.table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums;  font-family: var(--font-data); }
 
 .table th {
   padding: 14px 16px 10px;
@@ -212,6 +210,7 @@ input, select, textarea { caret-color: var(--espresso); }
   font-size: 12px;
   font-weight: 500;
   line-height: 1.6;
+  font-family: var(--font-data);
 }
 
 .tag-accent { background: rgb(167 141 120 / 0.3); color: var(--ink); }
@@ -332,7 +331,7 @@ input, select, textarea { caret-color: var(--espresso); }
 .modal::backdrop { background: rgb(41 28 14 / 0.5); }
 
 .modal-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 20px 4px 24px; }
-.modal-head h2 { margin: 0; font-size: 18px; font-weight: 700; line-height: 1.3; }
+.modal-head h2 { margin: 0; font-size: 18px; font-weight: 700; line-height: 1.3;  font-family: var(--font-display); }
 .modal form { margin: 0; }
 .modal-body { padding: 16px 24px 4px; }
 .modal-text { max-width: 60ch; margin: 0 0 8px; }
@@ -370,7 +369,7 @@ input, select, textarea { caret-color: var(--espresso); }
 
 .auth { display: grid; place-items: center; padding: 24px 16px; background: linear-gradient(195deg, color-mix(in srgb, var(--espresso) 65%, var(--umber)), var(--espresso) 70%) fixed; }
 .auth-card { width: min(400px, 100%); padding: 36px 32px 32px; border-radius: var(--radius); background: var(--card); box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.55), 0 10px 20px -10px rgb(0 0 0 / 0.4); }
-.auth-title { margin: 22px 0 4px; font-size: 22px; font-weight: 700; line-height: 1.25; }
+.auth-title { margin: 22px 0 4px; font-size: 22px; font-weight: 700; line-height: 1.25;  font-family: var(--font-display); }
 .auth-sub { margin: 0 0 24px; color: var(--muted); }
 .auth-form { display: flex; flex-direction: column; gap: 16px; }
 .auth-form .btn { min-height: 44px; margin-top: 8px; }
@@ -392,7 +391,7 @@ input, select, textarea { caret-color: var(--espresso); }
 .stat-tile-espresso { background: var(--espresso); color: var(--cream); box-shadow: 0 8px 16px -8px rgb(41 28 14 / 0.6), 0 3px 6px -3px rgb(41 28 14 / 0.3); }
 .stat-tile-umber { background: var(--umber); color: #fff; box-shadow: 0 8px 16px -8px rgb(41 28 14 / 0.55), 0 3px 6px -3px rgb(41 28 14 / 0.25); }
 .stat-label { margin: 12px 0 0; color: var(--muted); font-size: 14px; line-height: 1.3; text-align: right; }
-.stat-value { margin: 4px 0 14px; font-size: clamp(20px, 8cqi, 24px); font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; line-height: 1.15; text-align: right; }
+.stat-value { margin: 4px 0 14px; font-size: clamp(20px, 8cqi, 24px); font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; line-height: 1.15; text-align: right;  font-family: var(--font-data); }
 .stat-feature .stat-value { font-size: clamp(24px, 10cqi, 30px); }
 .stat-caption { margin: auto 0 0; padding-top: 12px; border-top: 1px solid color-mix(in srgb, var(--stone) 55%, transparent); color: var(--muted); font-size: 13px; }
 
