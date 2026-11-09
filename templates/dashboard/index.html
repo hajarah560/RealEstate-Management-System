@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load estate %}
+
+{% block title %}Overview{% endblock %}
+
+{% block content %}
+  <div class="page-head"><h1>Overview</h1></div>
+
+  <section class="stats" aria-label="At a glance">
+    <div class="stat"><div class="value">{{ clients }}</div><div class="label">Clients</div></div>
+    <div class="stat"><div class="value">{{ employees }}</div><div class="label">Employees</div></div>
+    <div class="stat"><div class="value">{{ free_land }}</div><div class="label">Available land</div></div>
+    <div class="stat"><div class="value">{{ free_buildings }}</div><div class="label">Available buildings</div></div>
+    <div class="stat"><div class="value">{{ active_leases }}</div><div class="label">Active leases</div></div>
+    <div class="stat"><div class="value">{{ payments_total|money }}</div><div class="label">Payments received</div></div>
+  </section>
+
+  <div class="two-col">
+    <section>
+      <h2>Recent payments</h2>
+      {% if recent_payments %}
+        <div class="table-wrap"><table>
+          <thead><tr><th>Client</th><th>Amount</th><th>Date</th></tr></thead>
+          <tbody>{% for p in recent_payments %}
+            <tr><td>{{ p.lease.client }}</td><td>{{ p.amount|money }}</td><td>{{ p.date|date:"d M Y" }}</td></tr>
+          {% endfor %}</tbody>
+        </table></div>
+      {% else %}<p class="empty">No payments yet.</p>{% endif %}
+    </section>
+
+    <section>
+      <h2>Recent leases</h2>
+      {% if recent_leases %}
+        <div class="table-wrap"><table>
+          <thead><tr><th>Client</th><th>Property</th><th>Ends</th></tr></thead>
+          <tbody>{% for l in recent_leases %}
+            <tr><td>{{ l.client }}</td><td>{{ l.property_name }}</td><td>{{ l.end_date|date:"d M Y" }}</td></tr>
+          {% endfor %}</tbody>
+        </table></div>
+      {% else %}<p class="empty">No leases yet.</p>{% endif %}
+    </section>
+  </div>
+{% endblock %}
