@@ -1,0 +1,21 @@
+{% extends "shared/list_base.html" %}
+{% load estate %}
+
+{% block thead %}
+  <th>#</th><th>Lease</th><th>Amount</th><th>Mode</th><th>Date</th><th>Recorded by</th>
+{% endblock %}
+
+{% block rows %}
+  {% for o in object_list %}
+    <tr>
+      <td>{{ o.pk }}</td>
+      <td>{{ o.lease }}</td>
+      <td>{{ o.amount|money }}</td>
+      <td>{{ o.mode }}</td>
+      <td>{{ o.date|date:"d M Y" }}</td>
+      <td>{{ o.employee|default:"-" }}</td>
+      {% url 'payment_edit' o.pk as edit_url %}{% url 'payment_delete' o.pk as delete_url %}
+      {% include "partials/_table_actions.html" %}
+    </tr>
+  {% endfor %}
+{% endblock %}
