@@ -1,0 +1,46 @@
+<aside class="sidebar">
+  <a class="brand" href="{% url 'dashboard' %}">
+    <svg class="brand-logo" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+      <rect width="40" height="40" rx="10" fill="#1bd488"/>
+      <path d="M8 19 20 9l12 10v12H8z" fill="#032d33"/>
+      <path d="M17 31v-8h6v8z" fill="#1bd488"/>
+    </svg>
+    <span class="brand-text">Estate Desk<small>Real estate management</small></span>
+  </a>
+
+  <nav class="nav" aria-label="Main">
+    <ul class="nav-list">
+      <li><a class="nav-link" href="{% url 'dashboard' %}"{% if request.path == "/" %} aria-current="page"{% endif %}><i class="ph ph-squares-four" aria-hidden="true"></i>Overview</a></li>
+      <li><a class="nav-link" href="{% url 'client_list' %}"{% if "/clients/" in request.path %} aria-current="page"{% endif %}><i class="ph ph-users-three" aria-hidden="true"></i>Clients</a></li>
+      <li><a class="nav-link" href="{% url 'employee_list' %}"{% if "/employees/" in request.path %} aria-current="page"{% endif %}><i class="ph ph-identification-badge" aria-hidden="true"></i>Employees</a></li>
+      <li><a class="nav-link" href="{% url 'land_list' %}"{% if "/land/" in request.path %} aria-current="page"{% endif %}><i class="ph ph-map-trifold" aria-hidden="true"></i>Land</a></li>
+      <li><a class="nav-link" href="{% url 'building_list' %}"{% if "/buildings/" in request.path %} aria-current="page"{% endif %}><i class="ph ph-buildings" aria-hidden="true"></i>Buildings</a></li>
+      <li><a class="nav-link" href="{% url 'lease_list' %}"{% if "/leases/" in request.path %} aria-current="page"{% endif %}><i class="ph ph-handshake" aria-hidden="true"></i>Leases</a></li>
+      <li><a class="nav-link" href="{% url 'payment_list' %}"{% if "/payments/" in request.path %} aria-current="page"{% endif %}><i class="ph ph-receipt" aria-hidden="true"></i>Payments</a></li>
+    </ul>
+
+    {% if user.is_staff %}
+      <div class="nav-bottom">
+        <a class="nav-link" href="/admin/"><i class="ph ph-shield-check" aria-hidden="true"></i>Django Admin</a>
+      </div>
+    {% endif %}
+  </nav>
+
+  <div class="user">
+    <span class="user-name" title="{{ user.get_username }}">{{ user.get_username }}</span>
+    <form method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-sidebar"><i class="ph ph-sign-out" aria-hidden="true"></i>Log out</button>
+    </form>
+  </div>
+  <script>
+    // On phones the nav is one sideways row: start it scrolled so the current page is in view.
+    (function () {
+      var nav = document.querySelector(".sidebar .nav");
+      var current = nav && nav.querySelector("[aria-current=page]");
+      if (current && nav.scrollWidth > nav.clientWidth) {
+        nav.scrollLeft = current.offsetLeft - (nav.clientWidth - current.offsetWidth) / 2;
+      }
+    })();
+  </script>
+</aside>

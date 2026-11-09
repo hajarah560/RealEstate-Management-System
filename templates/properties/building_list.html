@@ -2,7 +2,7 @@
 {% load estate %}
 
 {% block thead %}
-  <th>Name</th><th>Location</th><th>Price</th><th>Status</th>
+  <th scope="col">Name</th><th scope="col">Location</th><th scope="col" class="num">Price</th><th scope="col">Status</th>
 {% endblock %}
 
 {% block rows %}
@@ -10,8 +10,8 @@
     <tr>
       <td>{{ o.name }}</td>
       <td>{{ o.location }}</td>
-      <td>{{ o.price|money }}</td>
-      <td><span class="badge badge-{{ o.status }}">{{ o.get_status_display }}</span></td>
+      <td class="num">{{ o.price|money }}</td>
+      <td><span class="tag{% if o.status == "A" %} tag-accent{% endif %}">{{ o.get_status_display }}</span></td>
       {% url 'building_edit' o.pk as edit_url %}{% url 'building_delete' o.pk as delete_url %}
       {% include "partials/_table_actions.html" %}
     </tr>
