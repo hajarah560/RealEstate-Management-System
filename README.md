@@ -1,5 +1,7 @@
 # Estate Desk: Real Estate Management System
 
+> **Branch note:** this is the `commented` branch. The code is identical to `main`; only comments were added, written in plain English and technical terms for people new to the project. Do new work on `main`.
+
 A Django class project. Staff register, log in, and manage **clients, employees, land, buildings, leases and payments** from one dashboard. Plain Django templates, SQLite, no JavaScript framework.
 
 > **Current state in one line:** feature-complete for the class demo. All six entities have full add / edit / delete, sign-up and login work, and 11 automated tests pass. Nothing is deployed and there is no role system (see [Known limits](#known-limits)).
