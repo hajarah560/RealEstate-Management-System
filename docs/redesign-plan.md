@@ -1,5 +1,7 @@
 # Real Estate Management System: Redesign Plan
 
+> **Status: implemented and merged into `main`. Kept as history.** For the current state of the app read the top-level `README.md`. Where this plan and the code disagree, the code wins. Known differences: the branch note below is out of date, the logo and favicon were later redrawn (towers and roofs, see README "Design tokens and logo"), and sign-up was extended (see `signup-and-marking-plan.md`).
+
 > Branch: `redesign/dashboard-ui` (all work and pushes stay here; nothing goes to `main`)
 > Content source: `real-estate-frontend/` (the original HTML pages)
 > Design: SACCO layout and feel with our own palette and icons (see section 9)

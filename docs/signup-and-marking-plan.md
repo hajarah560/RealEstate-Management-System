@@ -1,6 +1,6 @@
 # Sign-up and marking criteria plan
 
-StStatus: **built** (steps 1, 2, 3, 6). Question 3 was answered: the lecturer's "admin template" means the dashboard, so steps 4 and 5 (admin customisation) were dropped.
+StStatus: **built** (steps 1, 2, 3, 6). The current state of the app is described in the top-level `README.md`; sections 2 and 4 below describe the situation before this work. Question 3 was answered: the lecturer's "admin template" means the dashboard, so steps 4 and 5 (admin customisation) were dropped.
  1. Why this plan exists
 
 The lecturer marks the project on a fixed list, and wants to **see sign-up working** because the system is meant to be like GitHub: an internal-style tool that people come to and register for.
