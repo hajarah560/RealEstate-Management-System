@@ -1,22 +1,38 @@
-{% load static %}<!doctype html>
+{% load static %}{% comment %}
+  Plain English: This is the "master page". Every other page (dashboard, lists, login) is
+  poured into the empty block slots below, so the sidebar, fonts and scripts are
+  written only once.
+  Technical: Django template inheritance. Child templates use extends "base.html"
+  and override blocks; anything not overridden keeps the default defined here.
+{% endcomment %}<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Estate Desk{% endblock %} · Estate Desk</title>
     <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
+    {% comment %} Plain English: the fonts and icons are downloaded from the internet, so the page needs a connection to look right.
+       Technical: Google Fonts supplies the three typefaces named in site.css (--font-display, --font, --font-data);
+       Phosphor Icons (unpkg CDN) supplies the <i class="ph ph-..."> icons. "preconnect" opens the connection early so text appears faster. {% endcomment %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=Source+Sans+3:wght@400;500;700&family=Nunito:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    {% comment %} Plain English: the ?v=5 is a "version sticker". Browsers keep old copies of CSS/JS, so changing the number forces everyone to download the new file.
+       Technical: cache-busting query string; the server ignores it, the browser treats it as a new URL. Bump it whenever site.css (or site.js below) changes.
+       The static tag turns the short path into the real URL (/static/css/site.css). {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/site.css' %}?v=5">
   </head>
   <body class="{% block body_class %}{% endblock %}">
+    {% comment %} Plain English: "shell" is the normal app layout (sidebar + main area). The login pages replace this whole block with their own layout (see auth_base.html).
+       Technical: the block lets a child template swap everything inside it. {% endcomment %}
     {% block shell %}
       <div class="shell">
+        {# Reusable piece of HTML pulled in from another file: the navigation sidebar. #}
         {% include "partials/_sidebar.html" %}
 
         <main class="main">
+          {# page_title = the heading text, actions = buttons on the right (e.g. "Add client"), content = the main body. Each child page fills these in. #}
           <header class="topbar">
             <h1 class="page-title">{% block page_title %}{% endblock %}</h1>
             <div class="actions">{% block actions %}{% endblock %}</div>
@@ -27,6 +43,9 @@
       </div>
     {% endblock %}
 
+    {% comment %} Plain English: small pop-up notes ("Client saved") shown once after an action.
+       Technical: "messages" comes from Django's messages framework (messages.success(...) in a view). The loop prints each one; the toast-<tag> class colours it
+       (success/error); the CSS animation fades it out, so no JavaScript is needed. role/aria-live let screen readers announce it. {% endcomment %}
     {% if messages %}
       <div class="toasts" role="status" aria-live="polite">
         {% for message in messages %}
@@ -38,7 +57,10 @@
       </div>
     {% endif %}
 
+    {% comment %} Plain English: an empty pop-up window. When you click Add/Edit/Delete, site.js loads a form from the server and drops it in here.
+       Technical: native HTML dialog element; site.js finds it by id="modal", fills it with innerHTML and opens it with showModal(). {% endcomment %}
     <dialog id="modal" class="modal" aria-labelledby="modal-title"></dialog>
+    {# "defer" = run after the page is parsed, so the script can find the elements above. ?v=4 is the same cache-busting trick as for the CSS. #}
     <script src="{% static 'js/site.js' %}?v=4" defer></script>
   </body>
 </html>

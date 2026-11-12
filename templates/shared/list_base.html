@@ -1,8 +1,14 @@
 {% extends "base.html" %}
+{% comment %}
+  Plain English: the skeleton shared by all seven list pages (clients, employees, land, buildings, leases, payments...): page heading, an "Add" button and a table.
+  Each list page only supplies the column headings (thead) and the row layout (rows).
+  Technical: extends base.html. The view (a ListView subclass) passes heading, add_label, add_url and object_list into the context.
+{% endcomment %}
 
 {% block title %}{{ heading }}{% endblock %}
 {% block page_title %}{{ heading }}{% endblock %}
 
+{# Fills the button area of base.html. data-modal="<url>" tells site.js: on click, fetch that URL and show the returned form in the pop-up dialog. #}
 {% block actions %}
   <button type="button" class="btn btn-primary btn-lg" data-modal="{{ add_url }}"><i class="ph ph-plus" aria-hidden="true"></i>{{ add_label }}</button>
 {% endblock %}
@@ -12,10 +18,13 @@
     <div class="table-wrap">
       <table class="table">
         <thead>
+          {# thead = column headings supplied by the child page; the last empty th is the column for the edit/delete buttons. #}
           <tr>{% block thead %}{% endblock %}<th scope="col" class="col-actions" aria-label="Actions"></th></tr>
         </thead>
         <tbody>
+          {# rows = one tr per record, supplied by the child page. #}
           {% block rows %}{% endblock %}
+          {# Friendly message when the table is empty. colspan="20" is just "wider than any table here" so it spans every column. #}
           {% if not object_list %}
             <tr><td class="table-empty" colspan="20">Nothing here yet. Use the button above to add the first one.</td></tr>
           {% endif %}

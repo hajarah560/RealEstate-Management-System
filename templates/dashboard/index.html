@@ -1,10 +1,16 @@
 {% extends "base.html" %}
+{% comment %}
+  Plain English: the Overview (home) page: six number cards and two "recent" tables. Technical: extends base.html; the numbers (clients, employees, free_land, free_buildings,
+  active_leases, payments_total, recent_payments, recent_leases) are computed in the dashboard view and passed in the context.
+{% endcomment %}
+{# Loads our custom money filter (templatetags/estate.py). #}
 {% load estate %}
 
 {% block title %}Overview{% endblock %}
 {% block page_title %}Overview{% endblock %}
 
 {% block content %}
+  {# Number cards. The six article blocks are the same pattern: icon tile (colour class from site.css), label, big number, caption. #}
   <section class="stats" aria-label="Estate Desk at a glance">
     <article class="card stat">
       <div class="stat-top">
@@ -56,15 +62,18 @@
         <span class="stat-tile stat-tile-umber"><i class="ph ph-receipt" aria-hidden="true"></i></span>
         <p class="stat-label">Payments received</p>
       </div>
+      {# |money formats the total as currency. #}
       <p class="stat-value">{{ payments_total|money }}</p>
       <p class="stat-caption">Across all leases</p>
     </article>
   </section>
 
+  {# Two side-by-side tables (stacked on small screens). The Leases one below has the same structure as Payments. #}
   <div class="recent">
     <section class="card" aria-labelledby="recent-payments-title">
       <header class="card-header">
         <h2 class="card-title" id="recent-payments-title">Recent payments</h2>
+        {# The url tag builds the link from the route name. #}
         <a class="card-link" href="{% url 'payment_list' %}" aria-label="View all payments">View all<i class="ph ph-arrow-right" aria-hidden="true"></i></a>
       </header>
       <div class="table-wrap">
@@ -73,6 +82,7 @@
             <tr><th scope="col">Client</th><th scope="col">Date</th><th scope="col" class="num">Amount</th></tr>
           </thead>
           <tbody>
+            {# The empty tag runs instead of the loop body when there are no payments. #}
             {% for p in recent_payments %}
               <tr><td>{{ p.lease.client }}</td><td>{{ p.date|date:"d M Y" }}</td><td class="num">{{ p.amount|money }}</td></tr>
             {% empty %}

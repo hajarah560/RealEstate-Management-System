@@ -1,4 +1,6 @@
+{# Same pattern as clients/client_list.html (see the comments there). Only the differences are noted below. #}
 {% extends "shared/list_base.html" %}
+{# Needed for the money filter. #}
 {% load estate %}
 
 {% block thead %}
@@ -11,6 +13,7 @@
       <td>{{ o.name }}</td>
       <td>{{ o.location }}</td>
       <td class="num">{{ o.price|money }}</td>
+      {# Status badge: "A" (available) gets the highlighted tag-accent colour, anything else the plain grey tag. #}
       <td><span class="tag{% if o.status == "A" %} tag-accent{% endif %}">{{ o.get_status_display }}</span></td>
       {% url 'building_edit' o.pk as edit_url %}{% url 'building_delete' o.pk as delete_url %}
       {% include "partials/_table_actions.html" %}

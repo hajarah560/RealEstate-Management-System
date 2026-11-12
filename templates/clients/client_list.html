@@ -1,17 +1,27 @@
 {% extends "shared/list_base.html" %}
+{% comment %}
+  Plain English: the Clients page. It reuses the common list layout and only says which columns to show and how each client row looks.
+  The other six list pages (employees, land, buildings, leases, payments) follow this exact same pattern.
+  Technical: the extends tag must stay the first real tag (comments before it are fine). Blocks thead/rows are defined in shared/list_base.html.
+{% endcomment %}
 
+{# Column headings. scope="col" tells screen readers each th labels a column. #}
 {% block thead %}
   <th scope="col">Name</th><th scope="col">Gender</th><th scope="col">Contact</th><th scope="col">Email</th><th scope="col">Address</th>
 {% endblock %}
 
+{# Plain English: repeat this table row once for every client. Technical: object_list is the queryset from the ListView; "o" is one Client. #}
 {% block rows %}
   {% for o in object_list %}
     <tr>
       <td>{{ o.first_name }} {{ o.last_name }}</td>
+      {# get_FOO_display shows the human label ("Male") instead of the stored code ("M"). #}
       <td>{{ o.get_gender_display }}</td>
       <td>{{ o.contact }}</td>
       <td>{{ o.email }}</td>
+      {# |default:"-" prints a dash when the value is empty. #}
       <td>{{ o.address|default:"-" }}</td>
+      {# "as edit_url" saves the generated address in a variable instead of printing it; the partial below reads edit_url and delete_url. o.pk = the record's id. #}
       {% url 'client_edit' o.pk as edit_url %}{% url 'client_delete' o.pk as delete_url %}
       {% include "partials/_table_actions.html" %}
     </tr>

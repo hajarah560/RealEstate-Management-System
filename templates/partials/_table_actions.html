@@ -1,3 +1,8 @@
+{% comment %}
+  Plain English: the pencil (edit) and bin (delete) buttons at the end of every table row.
+  Technical: edit_url and delete_url are set by the list page with the url tag ("as edit_url") just before including this file. data-modal="<url>" is read by static/js/site.js,
+  which fetches that URL and shows the form in the dialog. They are type="button" so they never submit anything themselves; aria-label names the icon-only buttons for screen readers.
+{% endcomment %}
 <td class="col-actions">
   <div class="row-actions">
     <button type="button" class="icon-btn" data-modal="{{ edit_url }}" aria-label="Edit"><i class="ph ph-pencil-simple" aria-hidden="true"></i></button>

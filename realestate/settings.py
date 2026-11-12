@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Plain English: the apps this team built; Django ignores an app until it is listed here.
+    # Technical: listing them lets Django find their models, migrations and templatetags.
     'core',
     'dashboard',
     'clients',
@@ -62,6 +64,8 @@ ROOT_URLCONF = 'realestate.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # Plain English: also look for templates in the project-level templates/ folder
+        # (shared layout, login pages). Technical: APP_DIRS below covers each app's own folder.
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -123,6 +127,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
+# Plain English: where our own CSS, JavaScript and images live (the static/ folder).
+# Technical: extra folders searched by the staticfiles app besides each app's static/.
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 
@@ -130,12 +136,18 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
+# Plain English: emails are printed in the terminal instead of really sent (handy for demos).
+# Technical: the console backend writes each email to stdout.
 MAILERS = {
     'default': {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
 
+# Plain English: where to send people. Technical: these take route names from urls.py.
+# LOGIN_URL: where @login_required sends visitors who are not logged in.
 LOGIN_URL = 'login'
+# After a successful login, go to the Overview page.
 LOGIN_REDIRECT_URL = 'dashboard'
+# After logging out, go back to the login page.
 LOGOUT_REDIRECT_URL = 'login'

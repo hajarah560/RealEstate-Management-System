@@ -1,3 +1,7 @@
+{% comment %}
+  Plain English: the company logo drawn as an inline SVG so it can change colour with CSS. The sidebar includes it plainly (tan tile); the login card includes it with dark=True (dark tile).
+  Technical: "dark" is an optional include variable; when set, the extra class brand-logo--dark swaps the --lg-* CSS variables. Each shape's class (lg-tile, lg-roof...) is coloured in site.css.
+{% endcomment %}
 {# Estate Desk mark: two towers behind two gabled roofs. Colours come from CSS (see .brand-logo in site.css). #}
 <svg class="brand-logo{% if dark %} brand-logo--dark{% endif %}" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
   <rect class="lg-tile" width="40" height="40" rx="10"/>

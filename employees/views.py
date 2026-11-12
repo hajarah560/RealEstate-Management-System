@@ -1,9 +1,16 @@
+# Views for the Employees page. Plain English: this follows exactly the same pattern as
+# clients/views.py (list page, plus Add / Edit / Delete pop-up forms), so read that file
+# first. Technical: only the parts that differ are commented below.
+
+# Imports: the same set as clients/views.py (messages, login_required, HttpResponse,
+# get_object_or_404 + render, reverse). Each is explained there.
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
+# The form and model for this app.
 from .forms import EmployeeForm
 from .models import Employee
 
@@ -67,5 +74,8 @@ def employee_delete(request, pk):
         messages.success(request, f"{name} deleted")
         return HttpResponse(status=204)
 
+    # Plain English: no extra warning here, because deleting an employee does not delete
+    # anything else. Technical: Lease.employee and Payment.employee use on_delete=SET_NULL,
+    # so those records stay and simply show no employee; delete_note is therefore empty.
     context = {"object": employee, "modal_title": "Delete employee", "delete_note": ""}
     return render(request, "shared/modal_confirm.html", context)

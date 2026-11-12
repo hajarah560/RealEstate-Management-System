@@ -1,6 +1,12 @@
 /* Estate Desk: the one stylesheet for every page.
    Palette: espresso, umber, tan, stone, cream. Everything else is mixed from these. */
 
+/* Design tokens.
+   Plain English: the colours, fonts, sizes and shadows are named once here and reused everywhere with var(--name),
+   so changing the look of the whole site means editing this one block.
+   Technical: CSS custom properties on :root. The palette idea is a warm "coffee" set of five colours (espresso, umber,
+   tan, stone, cream); every other colour below is derived from them rather than picked separately, so the site
+   stays harmonious. */
 :root {
   --espresso: #291c0e;       /* sidebar, text */
   --umber: #6e473b;          /* secondary tiles */
@@ -9,6 +15,8 @@
   --cream: #e1d4c2;          /* page */
 
   --ink: var(--espresso);         /* text */
+  /* color-mix(in srgb, A 35%, B) blends two colours: 35% of A and 65% of B. It lets us make lighter/darker
+     variants of the palette without hand-picking new hex codes. */
   --card: color-mix(in srgb, var(--cream) 35%, #fff);        /* cards and modals */
   --muted: color-mix(in srgb, var(--umber) 72%, var(--ink));  /* secondary text */
   --line-strong: color-mix(in srgb, var(--stone) 55%, var(--umber));
@@ -26,6 +34,8 @@
   --font-size: 16px;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
+  /* Soft layered shadows give depth. The design is deliberately flat: solid colours, no gradients,
+     so it stays clean and cheap to render. */
   --shadow-card: 0 1px 3px rgb(41 28 14 / 0.08), 0 8px 20px -10px rgb(41 28 14 / 0.18);
   --shadow-raised: 0 14px 30px -12px rgb(41 28 14 / 0.5), 0 4px 10px -4px rgb(41 28 14 / 0.3);
   --shadow-modal: 0 24px 48px -12px rgb(41 28 14 / 0.45), 0 8px 16px -8px rgb(41 28 14 / 0.25);
@@ -60,7 +70,7 @@ input, select, textarea { caret-color: var(--espresso); }
 /* Phosphor icons */
 .ph { font-size: 18px; line-height: 1; flex: none; }
 
-/* Shell */
+/* Shell: the page layout, a fixed-width sidebar column next to the flexible main area. */
 
 .shell {
   display: grid;
@@ -85,7 +95,7 @@ input, select, textarea { caret-color: var(--espresso); }
 .page-title { margin: 0; font-size: 24px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em;  font-family: var(--font-display); }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
-/* Sidebar */
+/* Sidebar: the dark left navigation (logo, links, user box). aria-current="page" marks the active link. */
 
 .sidebar {
   position: sticky;
@@ -115,6 +125,9 @@ input, select, textarea { caret-color: var(--espresso); }
   text-decoration: none;
 }
 
+/* The logo is an inline SVG (partials/_logo.html). Each shape has a class (lg-tile, lg-roof...) that reads colours from
+   three CSS variables: --lg-tile (background square), --lg-ink (main shapes) and --lg-back (rear tower). Swapping those
+   three variables (see .brand-logo--dark) recolours the entire logo, so one SVG works on both light and dark backgrounds. */
 .brand-logo { display: block; width: 40px; height: 40px; flex: none; }
 /* Logo colours: tan tile on the dark sidebar, espresso tile on the login card. Flat fills only. */
 .brand-logo { --lg-tile: var(--tan); --lg-ink: var(--espresso); --lg-back: var(--umber); }
@@ -162,7 +175,7 @@ input, select, textarea { caret-color: var(--espresso); }
 .user form { margin: 0; }
 .user-name { min-width: 0; overflow: hidden; font-size: 14px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
 
-/* Cards */
+/* Cards: the white-ish rounded panels that hold tables and stats. */
 
 .card {
   border: 1px solid color-mix(in srgb, var(--stone) 65%, transparent);
@@ -175,7 +188,7 @@ input, select, textarea { caret-color: var(--espresso); }
 .card-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 20px 12px; }
 .card-title { margin: 0; font-size: 16px; font-weight: 700;  font-family: var(--font-display); }
 
-/* Tables */
+/* Tables: data tables with uppercase column headings, row hover, and a sticky actions column. */
 
 .table-wrap { overflow-x: auto; overscroll-behavior-x: contain; }
 
@@ -226,7 +239,7 @@ input, select, textarea { caret-color: var(--espresso); }
 
 .tag-accent { background: rgb(167 141 120 / 0.3); color: var(--ink); }
 
-/* Buttons */
+/* Buttons: .btn is the base; -primary / -danger / -ghost / -sidebar are colour variants; .icon-btn is the small square icon-only button. */
 
 .btn {
   display: inline-flex;
@@ -280,7 +293,7 @@ input, select, textarea { caret-color: var(--espresso); }
 .icon-btn-danger:hover { background: rgb(179 57 47 / 0.1); color: var(--danger); }
 .row-actions { display: flex; justify-content: flex-end; gap: 4px; }
 
-/* Form fields */
+/* Form fields: the markup comes from partials/_fields.html (.field wrapping a label + input + errors). */
 
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 18px; }
 .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
@@ -324,7 +337,7 @@ input, select, textarea { caret-color: var(--espresso); }
 
 .errorlist { margin: 0; padding: 0; list-style: none; }
 
-/* Modal */
+/* Modal: styles the native <dialog id="modal"> that static/js/site.js fills with a form. ::backdrop is the dimmed layer behind it. */
 
 .modal {
   width: min(640px, calc(100vw - 32px));
@@ -351,7 +364,7 @@ input, select, textarea { caret-color: var(--espresso); }
 
 @keyframes modal-in { from { opacity: 0; transform: translateY(10px) scale(0.98); } }
 
-/* Toasts */
+/* Toasts: the small notifications from Django messages (base.html). They fade out by CSS animation after about 5 seconds. */
 
 .toasts { position: fixed; right: 24px; bottom: 24px; z-index: 50; display: flex; flex-direction: column; gap: 10px; max-width: min(380px, calc(100vw - 32px)); }
 
@@ -414,6 +427,7 @@ input, select, textarea { caret-color: var(--espresso); }
 .card-link:hover { text-decoration: underline; }
 .card-link .ph { font-size: 16px; }
 
+/* Responsive dashboard grid: 1 column on phones, 2 from 561px, 3 from 1280px. The two recent tables sit side by side only from 1380px. */
 @media (min-width: 561px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1280px) { .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (min-width: 1380px) { .recent { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -424,7 +438,9 @@ input, select, textarea { caret-color: var(--espresso); }
   .table th:first-child, .table td:first-child { padding-left: 16px; }
 }
 
-/* Small screens: the rail becomes a compact bar above the content. */
+/* Small screens: the rail becomes a compact bar above the content.
+   Technical: this media query applies only when the window is 860px wide or less (phones, small tablets). The sidebar switches
+   from a sticky column to a two-row grid (brand + user, then the nav as a sideways-scrolling row), and the shell goes single-column. */
 
 @media (max-width: 860px) {
   .shell { grid-template-columns: minmax(0, 1fr); align-content: start; gap: 18px; padding: 12px; }
@@ -471,6 +487,7 @@ input, select, textarea { caret-color: var(--espresso); }
   .toasts { right: 16px; bottom: 16px; }
 }
 
+/* Very small phones: one-column forms and tighter padding. */
 @media (max-width: 560px) {
   .form-grid { grid-template-columns: minmax(0, 1fr); }
   .modal-head { padding: 18px 16px 4px 20px; }
@@ -479,6 +496,7 @@ input, select, textarea { caret-color: var(--espresso); }
   .auth-card { padding: 28px 22px 24px; }
 }
 
+/* Accessibility: if the user's system asks for less motion, make animations and transitions effectively instant. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }

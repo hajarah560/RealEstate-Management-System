@@ -1,4 +1,6 @@
+{# Same pattern as clients/client_list.html (see the comments there). Only the differences are noted below. #}
 {% extends "shared/list_base.html" %}
+{# Loads our custom filters from the app's templatetags/estate.py; needed for the money filter below. #}
 {% load estate %}
 
 {% block thead %}
@@ -10,6 +12,7 @@
     <tr>
       <td class="code">{{ o.pk }}</td>
       <td>{{ o.lease }}</td>
+      {# |money is our own filter: formats the number as currency (e.g. 1,500.00). class="num" right-aligns numbers. #}
       <td class="num">{{ o.amount|money }}</td>
       <td>{{ o.mode }}</td>
       <td>{{ o.date|date:"d M Y" }}</td>

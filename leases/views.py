@@ -1,9 +1,17 @@
+# Views for the Leases page. Plain English: this follows exactly the same pattern as
+# clients/views.py (list page, plus Add / Edit / Delete pop-up forms), so read that file
+# first. Technical: only the parts that differ are commented below.
+# Different here: a lease points at several other tables, so the list query is tuned.
+
+# Imports: the same set as clients/views.py (messages, login_required, HttpResponse,
+# get_object_or_404 + render, reverse). Each is explained there.
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
+# The form and model for this app.
 from .forms import LeaseForm
 from .models import Lease
 
@@ -11,6 +19,11 @@ from .models import Lease
 # READ: list the leases
 @login_required
 def lease_list(request):
+    # Plain English: fetch each lease together with its client, employee, land and
+    # building in one go, so the page stays fast. Technical: select_related() does a SQL
+    # JOIN; without it the template would run one extra query per row (the N+1 problem).
+    # land and building are both listed because a lease uses only one of them (the other
+    # is NULL); select_related copes with NULL links.
     leases = Lease.objects.select_related("client", "employee", "land", "building").order_by("-id")
 
     context = {
@@ -67,5 +80,7 @@ def lease_delete(request, pk):
         messages.success(request, f"{name} deleted")
         return HttpResponse(status=204)
 
+    # Plain English: the warning mentions payments because they go with the lease.
+    # Technical: Payment.lease uses on_delete=CASCADE.
     context = {"object": lease, "modal_title": "Delete lease", "delete_note": "its payments"}
     return render(request, "shared/modal_confirm.html", context)

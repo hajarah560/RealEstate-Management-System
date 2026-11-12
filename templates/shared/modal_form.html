@@ -1,9 +1,17 @@
+{% comment %}
+  Plain English: the content of the Add / Edit pop-up. It is NOT a full page: the server returns just this fragment, and site.js puts it inside the dialog (id="modal") from base.html.
+  Technical: data-close on a button makes site.js close the dialog. action="{{ request.path }}" posts back to the same URL that served the form. On submit site.js sends it with fetch();
+  a 204 reply means saved (page reloads), otherwise the server returns this fragment again with errors and site.js redraws it.
+{% endcomment %}
 <div class="modal-head">
   <h2 id="modal-title">{{ modal_title }}</h2>
+  {# data-close = "close the dialog when clicked" (handled by site.js). #}
   <button type="button" class="icon-btn" data-close aria-label="Close"><i class="ph ph-x" aria-hidden="true"></i></button>
 </div>
 <form method="post" action="{{ request.path }}">
+  {# Required in every POST form (proof the request comes from our own page). #}
   {% csrf_token %}
+  {# The fields are drawn by the shared partial. #}
   <div class="modal-body"><div class="form-grid">{% include "partials/_fields.html" %}</div></div>
   <div class="modal-foot">
     <button type="button" class="btn btn-ghost" data-close>Cancel</button>

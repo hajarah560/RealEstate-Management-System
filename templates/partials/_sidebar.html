@@ -1,9 +1,15 @@
+{% comment %}
+  Plain English: the dark navigation column on the left (logo, page links, Django Admin link for staff, username and Log out). Included by base.html.
+  Technical: "request" and "user" are available because Django's context processors are enabled in settings.py.
+{% endcomment %}
 <aside class="sidebar">
   <a class="brand" href="{% url 'dashboard' %}">
     {% include "partials/_logo.html" %}
     <span class="brand-text">Estate Desk<small>Real estate management</small></span>
   </a>
 
+  {% comment %} Plain English: each link lights up when you are on that page. Technical: aria-current="page" is printed only if request.path (the current URL) matches; site.css styles
+     [aria-current="page"] and screen readers announce it. The dashboard needs an exact match ("/") because every URL contains "/"; the others use "in" (contains). {% endcomment %}
   <nav class="nav" aria-label="Main">
     <ul class="nav-list">
       <li><a class="nav-link" href="{% url 'dashboard' %}"{% if request.path == "/" %} aria-current="page"{% endif %}><i class="ph ph-squares-four" aria-hidden="true"></i>Overview</a></li>
@@ -15,6 +21,7 @@
       <li><a class="nav-link" href="{% url 'payment_list' %}"{% if "/payments/" in request.path %} aria-current="page"{% endif %}><i class="ph ph-receipt" aria-hidden="true"></i>Payments</a></li>
     </ul>
 
+    {# Only staff accounts (is_staff=True, e.g. admin1) see the link to Django's built-in admin site; normal users never see it. #}
     {% if user.is_staff %}
       <div class="nav-bottom">
         <a class="nav-link" href="/admin/"><i class="ph ph-shield-check" aria-hidden="true"></i>Django Admin</a>
@@ -24,6 +31,7 @@
 
   <div class="user">
     <span class="user-name" title="{{ user.get_username }}">{{ user.get_username }}</span>
+    {# Log out is a POST form (not a plain link) so other sites cannot log you out by tricking your browser; hence it also needs the CSRF token. #}
     <form method="post" action="{% url 'logout' %}">
       {% csrf_token %}
       <button type="submit" class="btn btn-sidebar"><i class="ph ph-sign-out" aria-hidden="true"></i>Log out</button>

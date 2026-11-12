@@ -1,13 +1,24 @@
+# Views for the Properties page. Plain English: this follows exactly the same pattern as
+# clients/views.py (list page, plus Add / Edit / Delete pop-up forms), so read that file
+# first. Technical: only the parts that differ are commented below.
+# Different here: this one file serves TWO models, Land and Building, so every view
+# below comes in a land_* and a building_* version (same code, different model/form).
+# Their status choices are shared (STATUS_OPTIONS in properties/models.py).
+
+# Imports: the same set as clients/views.py (messages, login_required, HttpResponse,
+# get_object_or_404 + render, reverse). Each is explained there.
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
+# The two forms and two models of this app (the dot means 'this same folder').
 from .forms import LandForm, BuildingForm
 from .models import Land, Building
 
 
+# ---- LAND ----
 # READ: list the lands
 @login_required
 def land_list(request):
@@ -67,10 +78,13 @@ def land_delete(request, pk):
         messages.success(request, f"{name} deleted")
         return HttpResponse(status=204)
 
+    # Plain English: deleting land also deletes the leases on it, and their payments.
+    # Technical: Lease.land uses on_delete=CASCADE and Payment.lease cascades from Lease.
     context = {"object": land, "modal_title": "Delete land", "delete_note": "its leases and their payments"}
     return render(request, "shared/modal_confirm.html", context)
 
 
+# ---- BUILDING ---- (the same four views again, for the Building model)
 # READ: list the buildings
 @login_required
 def building_list(request):
@@ -130,5 +144,6 @@ def building_delete(request, pk):
         messages.success(request, f"{name} deleted")
         return HttpResponse(status=204)
 
+    # Same warning as for land: Lease.building is also on_delete=CASCADE.
     context = {"object": building, "modal_title": "Delete building", "delete_note": "its leases and their payments"}
     return render(request, "shared/modal_confirm.html", context)

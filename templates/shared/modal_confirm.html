@@ -1,10 +1,16 @@
+{% comment %}
+  Plain English: the "Are you sure you want to delete this?" pop-up. Like modal_form.html it is a fragment that site.js loads into the dialog.
+  Technical: modal_title, object and delete_note come from the delete view. Submitting POSTs to the same URL (request.path), which deletes the record; Cancel and the X use data-close.
+{% endcomment %}
 <div class="modal-head">
   <h2 id="modal-title">{{ modal_title }}?</h2>
   <button type="button" class="icon-btn" data-close aria-label="Close"><i class="ph ph-x" aria-hidden="true"></i></button>
 </div>
 <form method="post" action="{{ request.path }}">
+  {# Required in every POST form. #}
   {% csrf_token %}
   <div class="modal-body">
+    {# delete_note (optional) warns about related records that go too, e.g. "along with its leases". #}
     <p class="modal-text"><strong>{{ object }}</strong> will be deleted{% if delete_note %}, along with {{ delete_note }}{% endif %}.</p>
     <p class="modal-text modal-warning">This cannot be undone.</p>
   </div>

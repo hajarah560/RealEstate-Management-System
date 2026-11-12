@@ -1,12 +1,20 @@
 {% extends "base.html" %}
+{% comment %}
+  Plain English: the shared look of the two logged-out pages (Log in and Sign up): one centred card with a logo, two tabs, a form and a link to the other page.
+  Technical: extends base.html but replaces the whole "shell" block (no sidebar). registration/login.html and sign_up.html extend THIS file and fill the
+  small blocks below (titles, button text, tab highlight).
+{% endcomment %}
+{# Adds class="auth" to the body so site.css can paint the dark background behind the card. #}
 {% block body_class %}auth{% endblock %}
 
 {# Shared card for the logged-out pages: login and sign-up. #}
 {% block shell %}
   <main class="auth-card">
+    {# Logo partial with dark=True: the card is light, so the logo uses the dark-tile colour scheme (see .brand-logo--dark in site.css). #}
     {% include "partials/_logo.html" with dark=True %}
 
     <nav class="auth-switch" aria-label="Log in or sign up">
+      {# The url tag looks up the address by its route name (urls.py), so links never break if the path changes. The tab blocks print "active" on the current tab. #}
       <a href="{% url 'login' %}" class="{% block tab_login %}{% endblock %}">Log in</a>
       <a href="{% url 'sign_up' %}" class="{% block tab_signup %}{% endblock %}">Sign up</a>
     </nav>
@@ -15,8 +23,12 @@
     <p class="auth-sub">{% block auth_sub %}{% endblock %}</p>
 
     <form method="post" class="auth-form">
+      {% comment %} Plain English: a secret ticket that proves the form was submitted from OUR site, not a fake page. Every POST form needs one or Django rejects it (403).
+         Technical: CSRF protection; renders a hidden input with a per-session token that CsrfViewMiddleware checks. {% endcomment %}
       {% csrf_token %}
+      {# Extra hidden inputs for a child page (login uses it to remember where to go after logging in). #}
       {% block auth_hidden %}{% endblock %}
+      {# Draws every form field (label, input, errors) from the "form" object the view passed in. #}
       {% include "partials/_fields.html" %}
       <button type="submit" class="btn btn-primary btn-block">{% block auth_submit %}{% endblock %}</button>
     </form>

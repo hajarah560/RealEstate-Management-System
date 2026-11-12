@@ -1,4 +1,7 @@
+{# Same pattern as clients/client_list.html (see the comments there). Only the differences are noted below. #}
+{# Same as building_list.html but with two extra columns: land type and size. #}
 {% extends "shared/list_base.html" %}
+{# Needed for the money filter. #}
 {% load estate %}
 
 {% block thead %}
@@ -13,6 +16,7 @@
       <td>{{ o.land_type }}</td>
       <td>{{ o.land_size }}</td>
       <td class="num">{{ o.price|money }}</td>
+      {# Status badge: "A" (available) is highlighted. #}
       <td><span class="tag{% if o.status == "A" %} tag-accent{% endif %}">{{ o.get_status_display }}</span></td>
       {% url 'land_edit' o.pk as edit_url %}{% url 'land_delete' o.pk as delete_url %}
       {% include "partials/_table_actions.html" %}

@@ -1,3 +1,8 @@
+{% comment %}
+  Plain English: draws a whole form automatically: error box, then each field with its label, the input box, error text and help text. Used by the Add/Edit pop-up and the login/sign-up forms.
+  Technical: expects a Django "form" in the context. The field tag renders the widget HTML (input/select/textarea) chosen by the form class; hidden fields (e.g. "next") are printed first
+  without labels. "has-error" lets site.css draw a red border. |safe is used for help_text because Django's password hints contain HTML lists (the text comes from Django, not users).
+{% endcomment %}
 {% if form.non_field_errors %}<div class="form-errors" role="alert">{{ form.non_field_errors }}</div>{% endif %}
 {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
 {% for field in form.visible_fields %}

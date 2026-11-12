@@ -1,3 +1,4 @@
+{# Same pattern as clients/client_list.html (see the comments there). Only the differences are noted below. #}
 {% extends "shared/list_base.html" %}
 
 {% block thead %}
@@ -7,9 +8,12 @@
 {% block rows %}
   {% for o in object_list %}
     <tr>
+      {# class="code" gives the ID a slightly bolder look (site.css). #}
       <td class="code">{{ o.pk }}</td>
       <td>{{ o.client }}</td>
+      {# A lease points to either a Land or a Building; property_name and the if/else show which one it is. #}
       <td>{{ o.property_name }} <small>({% if o.land %}Land{% else %}Building{% endif %})</small></td>
+      {# date:"d M Y" formats the date like 05 Mar 2025. #}
       <td>{{ o.employee|default:"-" }}</td>
       <td>{{ o.start_date|date:"d M Y" }}</td>
       <td>{{ o.end_date|date:"d M Y" }}</td>
