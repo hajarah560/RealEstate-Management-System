@@ -1,15 +1,22 @@
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 from django.shortcuts import redirect, render
+
+from .forms import SignUpForm
 
 
 def sign_up(request):
+    # Sign-up is for visitors only. Anyone already logged in goes to the Overview.
+    if request.user.is_authenticated:
+        return redirect("dashboard")
+
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Account created. You can log in now.")
-            return redirect("login")
+            user = form.save()
+            login(request, user)
+            messages.success(request, f"Welcome, {user.first_name}. Your account is ready.")
+            return redirect("dashboard")
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
     return render(request, "registration/sign_up.html", {"form": form})
