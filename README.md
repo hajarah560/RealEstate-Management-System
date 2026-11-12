@@ -41,16 +41,15 @@ python manage.py seed_demo names.json --reset
 - Dashboard with totals and the recent leases and payments.
 - Shared `templates/base.html` with a floating sidebar, plus partials for the sidebar, form fields and table actions.
 - Login, logout and sign-up using Django auth. The view functions are protected with `@login_required`.
+- Sign-up collects username, first name, last name, email and a password, then signs the new user in and lands on the Overview. `/login/` and `/sign_up/` redirect to the Overview for anyone already logged in, and the app itself has no sign-up link. Both pages share `templates/auth_base.html` and have a Log in / Sign up switch.
+- Tests in `core/tests.py` cover sign-up and the access rules (`python manage.py test`).
 - Restyled UI: brown and cream palette, three typefaces, flat stat card icons.
 - `seed_demo` command for demo data.
 
-### Not done yet
+### Not done
 
-The plan is in `docs/signup-and-marking-plan.md`. It is a plan only and nothing in it is built.
-
-- **Sign-up:** it is still reachable when logged in, it does not log the new user in, and it collects no name or email. Login is also reachable when logged in.
-- **Admin site:** every model is registered with the bare default `admin.site.register`, with no customisation.
-- **Tests:** there are none.
+- **Admin site:** left as the default Django admin on purpose. The lecturer's "admin template" is the dashboard.
+- **Roles:** everyone who signs up gets full add, edit and delete rights. Fine for a class demo, so keep the data demo-only.
 - `real-estate-frontend/` is the original static HTML mock. The running app does not use it.
 
 ## Apps

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block body_class %}auth{% endblock %}
+
+{# Shared card for the logged-out pages: login and sign-up. #}
+{% block shell %}
+  <main class="auth-card">
+    <svg class="brand-logo" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+      <rect width="40" height="40" rx="10" fill="#291C0E"/>
+      <path d="M8 19 20 9l12 10v12H8z" fill="#A78D78"/>
+      <path d="M17 31v-8h6v8z" fill="#291C0E"/>
+    </svg>
+
+    <nav class="auth-switch" aria-label="Log in or sign up">
+      <a href="{% url 'login' %}" class="{% block tab_login %}{% endblock %}">Log in</a>
+      <a href="{% url 'sign_up' %}" class="{% block tab_signup %}{% endblock %}">Sign up</a>
+    </nav>
+
+    <h1 class="auth-title">{% block auth_title %}{% endblock %}</h1>
+    <p class="auth-sub">{% block auth_sub %}{% endblock %}</p>
+
+    <form method="post" class="auth-form">
+      {% csrf_token %}
+      {% block auth_hidden %}{% endblock %}
+      {% include "partials/_fields.html" %}
+      <button type="submit" class="btn btn-primary btn-block">{% block auth_submit %}{% endblock %}</button>
+    </form>
+
+    <p class="auth-alt">{% block auth_alt %}{% endblock %}</p>
+  </main>
+{% endblock %}

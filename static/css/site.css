@@ -369,6 +369,9 @@ input, select, textarea { caret-color: var(--espresso); }
 
 .auth { display: grid; place-items: center; padding: 24px 16px; background: var(--espresso); }
 .auth-card { width: min(400px, 100%); padding: 36px 32px 32px; border-radius: var(--radius); background: var(--card); box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.55), 0 10px 20px -10px rgb(0 0 0 / 0.4); }
+.auth-switch { display: flex; gap: 4px; margin-top: 22px; padding: 4px; border-radius: 10px; background: var(--cream); }
+.auth-switch a { flex: 1; padding: 8px 0; border-radius: 7px; text-align: center; font-weight: 500; color: var(--muted); text-decoration: none; }
+.auth-switch a.active { background: var(--tan); color: var(--espresso); }
 .auth-title { margin: 22px 0 4px; font-size: 22px; font-weight: 700; line-height: 1.25;  font-family: var(--font-display); }
 .auth-sub { margin: 0 0 24px; color: var(--muted); }
 .auth-form { display: flex; flex-direction: column; gap: 16px; }

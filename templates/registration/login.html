@@ -1,23 +1,8 @@
-{% extends "base.html" %}
-{% block title %}Sign in{% endblock %}
-{% block body_class %}auth{% endblock %}
-
-{% block shell %}
-  <main class="auth-card">
-    <svg class="brand-logo" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
-      <rect width="40" height="40" rx="10" fill="#291C0E"/>
-      <path d="M8 19 20 9l12 10v12H8z" fill="#A78D78"/>
-      <path d="M17 31v-8h6v8z" fill="#291C0E"/>
-    </svg>
-    <h1 class="auth-title">Estate Desk</h1>
-    <p class="auth-sub">Sign in to manage clients, properties and leases</p>
-
-    <form method="post" class="auth-form">
-      {% csrf_token %}
-      {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
-      {% include "partials/_fields.html" %}
-      <button type="submit" class="btn btn-primary btn-block">Log in</button>
-    </form>
-    <p class="auth-alt">New here? <a href="{% url 'sign_up' %}">Create an account</a></p>
-  </main>
-{% endblock %}
+{% extends "auth_base.html" %}
+{% block title %}Log in{% endblock %}
+{% block tab_login %}active{% endblock %}
+{% block auth_title %}Estate Desk{% endblock %}
+{% block auth_sub %}Log in to manage clients, properties and leases{% endblock %}
+{% block auth_hidden %}{% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}{% endblock %}
+{% block auth_submit %}Log in{% endblock %}
+{% block auth_alt %}New here? <a href="{% url 'sign_up' %}">Create an account</a>{% endblock %}

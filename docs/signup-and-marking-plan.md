@@ -1,8 +1,7 @@
 # Sign-up and marking criteria plan
 
-Status: **plan only, nothing built yet.** Read it, answer the three questions in section 10, then we build.
-
-## 1. Why this plan exists
+StStatus: **built** (steps 1, 2, 3, 6). Question 3 was answered: the lecturer's "admin template" means the dashboard, so steps 4 and 5 (admin customisation) were dropped.
+ 1. Why this plan exists
 
 The lecturer marks the project on a fixed list, and wants to **see sign-up working** because the system is meant to be like GitHub: an internal-style tool that people come to and register for.
 
