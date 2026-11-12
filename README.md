@@ -33,8 +33,19 @@ Open http://127.0.0.1:8000/. You will be sent to the login page.
 
 | Way in | How |
 |---|---|
-| Demo account | Username `admin`, password `admin12345` (ships in `db.sqlite3`, is a superuser) |
+| Demo admin account | Username `admin`, password `admin12345` (ships in `db.sqlite3`, is a superuser, can open `/admin/`) |
+| Test account | Username `admin1`, password `estate12345` (ships in `db.sqlite3`, a normal user: full access to the app, no Django Admin) |
 | Your own account | Click **Sign up** on the login page, or open http://127.0.0.1:8000/sign_up/ |
+
+### Opening Django Admin
+
+Django Admin (`/admin/`) is the built-in back office for managing user accounts and raw records. Only staff users can enter.
+
+1. Log in at `/login/` as `admin` / `admin12345`.
+2. Click **Django Admin** at the bottom of the sidebar, or go to http://127.0.0.1:8000/admin/.
+3. To let another account in, open **Users**, pick the user, tick **Staff status**, and save. Only a superuser can do this.
+
+`admin1` and any account created through Sign up are not staff, so they never see the Django Admin link, and opening `/admin/` by hand shows the admin login prompt instead.
 
 ## What the app does
 
