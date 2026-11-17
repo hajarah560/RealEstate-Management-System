@@ -1,4 +1,12 @@
-# Estate Desk: Real Estate Management System
+# Real Estate Management System
+
+## Project Description
+The System provides a centralized platform for managing properties, clients, employees, payments and lease agreements
+
+## Group Members
+1. MUYINGO HAJARAH   224-063061-30112
+2. NAMAGANDA SUNITAH 224-063061-28943
+
 
 A Django class project. Staff register, log in, and manage **clients, employees, land, buildings, leases and payments** from one dashboard. Plain Django templates, SQLite, no JavaScript framework.
 
@@ -33,15 +41,17 @@ Open http://127.0.0.1:8000/. You will be sent to the login page.
 
 | Way in | How |
 |---|---|
-| Demo admin account | Username `admin`, password `admin12345` (ships in `db.sqlite3`, is a superuser, can open `/admin/`) |
+| Demo admin account | Username `admin`, password `admin123` (ships in `db.sqlite3`, is a superuser, can open `/admin/`) |
 | Test account | Username `admin1`, password `estate12345` (ships in `db.sqlite3`, a normal user: full access to the app, no Django Admin) |
+| Test account | Username `admin2`, password `estate12345` (ships in `db.sqlite3`, a normal user: full access to the app, no Django Admin) |
+| Test account | Username `admin3`, password `hajarah560` (ships in `db.sqlite3`, a normal user: full access to the app, no Django Admin) |
 | Your own account | Click **Sign up** on the login page, or open http://127.0.0.1:8000/sign_up/ |
 
 ### Opening Django Admin
 
 Django Admin (`/admin/`) is the built-in back office for managing user accounts and raw records. Only staff users can enter.
 
-1. Log in at `/login/` as `admin` / `admin12345`.
+1. Log in at `/login/` as `admin` / `admin123`.
 2. Click **Django Admin** at the bottom of the sidebar, or go to http://127.0.0.1:8000/admin/.
 3. To let another account in, open **Users**, pick the user, tick **Staff status**, and save. Only a superuser can do this.
 
