@@ -29,7 +29,7 @@ A Django class project. Staff register, log in, and manage **clients, employees,
 
 ## Run it
 
-Needs Python 3 and Django 6.1 or newer (the only dependency).
+Needs Python 3.14 and the packages in `requirements.txt`.
 
 ```
 pip install -r requirements.txt
@@ -56,6 +56,22 @@ Django Admin (`/admin/`) is the built-in back office for managing user accounts 
 3. To let another account in, open **Users**, pick the user, tick **Staff status**, and save. Only a superuser can do this.
 
 `admin1` and any account created through Sign up are not staff, so they never see the Django Admin link, and opening `/admin/` by hand shows the admin login prompt instead.
+
+### Deploying to Render
+
+1. Commit and push this project, including `render.yaml`, to your Git repository.
+2. In the [Render Dashboard](https://dashboard.render.com/), select **New > Blueprint**, connect the repository, and apply the Blueprint. It creates a free web service and PostgreSQL database. Render generates `SECRET_KEY` and supplies `DATABASE_URL`; the build installs dependencies, collects static files, and runs migrations.
+3. Wait for the deploy to finish and open the service's `onrender.com` URL.
+
+The PostgreSQL database starts empty. The accounts and records in the local `db.sqlite3`, including the demo `admin` account, are not copied to Render. Create a separate superuser for the deployed database. On a paid web service, use Render Shell to run `python manage.py createsuperuser`. Free services do not have Shell access: on your own computer, install the project requirements, copy the database's **External Database URL** from its Render dashboard, and in PowerShell run:
+
+```powershell
+$env:DATABASE_URL = '<Render External Database URL>'
+python manage.py createsuperuser
+Remove-Item Env:DATABASE_URL
+```
+
+Enter `admin` as the username and choose a strong, unique password when prompted. Keep the database URL private. The documented local demo password is public and should not be used for a deployed account. Render's free database expires after 30 days and has no automatic backups; the free web service also sleeps after inactivity. See [Render's free-tier limits](https://render.com/docs/free).
 
 ## What the app does
 
@@ -219,7 +235,7 @@ Everything else is mixed from these. **Flat colours only, no gradients.** Fonts:
 - **No password reset, email verification or social login.**
 - **Django Admin is stock.** Left unstyled on purpose: the lecturer's "admin template" means the dashboard.
 - **Test coverage is auth only.** CRUD and `LeaseForm` validation are checked by hand.
-- **Not production ready.** `DEBUG = True`, a committed `SECRET_KEY`, SQLite, no HTTPS settings. The Phosphor icons and fonts load from a CDN, so the UI needs internet.
+- **Deployment limits.** Local development uses SQLite and a development secret; Render uses PostgreSQL and a generated secret. The Phosphor icons and fonts load from a CDN, so the UI needs internet.
 - **Real names in git history.** The defence schedule PDF is still in the history of `main` (commit `5c00f2a`). Rewriting history is a separate decision and has not been made.
 - `real-estate-frontend/` is the original static HTML mock. The running app does not use it.
 
