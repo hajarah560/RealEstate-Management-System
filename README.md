@@ -60,18 +60,10 @@ Django Admin (`/admin/`) is the built-in back office for managing user accounts 
 ### Deploying to Render
 
 1. Commit and push this project, including `render.yaml`, to your Git repository.
-2. In the [Render Dashboard](https://dashboard.render.com/), select **New > Blueprint**, connect the repository, and apply the Blueprint. It creates a free web service and PostgreSQL database. Render generates `SECRET_KEY` and supplies `DATABASE_URL`; the build installs dependencies, collects static files, and runs migrations.
+2. In the [Render Dashboard](https://dashboard.render.com/), select **New > Blueprint**, connect the repository, and apply the Blueprint. It creates a free web service. Render generates `SECRET_KEY`; the build installs dependencies, collects static files, and runs migrations.
 3. Wait for the deploy to finish and open the service's `onrender.com` URL.
 
-The PostgreSQL database starts empty. The accounts and records in the local `db.sqlite3`, including the demo `admin` account, are not copied to Render. Create a separate superuser for the deployed database. On a paid web service, use Render Shell to run `python manage.py createsuperuser`. Free services do not have Shell access: on your own computer, install the project requirements, copy the database's **External Database URL** from its Render dashboard, and in PowerShell run:
-
-```powershell
-$env:DATABASE_URL = '<Render External Database URL>'
-python manage.py createsuperuser
-Remove-Item Env:DATABASE_URL
-```
-
-Enter `admin` as the username and choose a strong, unique password when prompted. Keep the database URL private. The documented local demo password is public and should not be used for a deployed account. Render's free database expires after 30 days and has no automatic backups; the free web service also sleeps after inactivity. See [Render's free-tier limits](https://render.com/docs/free).
+The deployed site uses the committed `db.sqlite3`, so it starts with the same data and accounts as a fresh clone (including the demo `admin` account). Render's free disk is ephemeral: anything added on the live site is lost on the next deploy or restart. To change the live data, change `db.sqlite3` locally and commit it. The free web service also sleeps after inactivity. See [Render's free-tier limits](https://render.com/docs/free).
 
 ## What the app does
 
@@ -235,7 +227,7 @@ Everything else is mixed from these. **Flat colours only, no gradients.** Fonts:
 - **No password reset, email verification or social login.**
 - **Django Admin is stock.** Left unstyled on purpose: the lecturer's "admin template" means the dashboard.
 - **Test coverage is auth only.** CRUD and `LeaseForm` validation are checked by hand.
-- **Deployment limits.** Local development uses SQLite and a development secret; Render uses PostgreSQL and a generated secret. The Phosphor icons and fonts load from a CDN, so the UI needs internet.
+- **Deployment limits.** Local development uses SQLite and a development secret; Render uses the committed SQLite file and a generated secret. The Phosphor icons and fonts load from a CDN, so the UI needs internet.
 - **Real names in git history.** The defence schedule PDF is still in the history of `main` (commit `5c00f2a`). Rewriting history is a separate decision and has not been made.
 - `real-estate-frontend/` is the original static HTML mock. The running app does not use it.
 

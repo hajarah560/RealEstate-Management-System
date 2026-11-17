@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,8 +35,8 @@ CSRF_TRUSTED_ORIGINS = [
 
 if os.environ.get('RENDER_EXTERNAL_HOSTNAME'):
     ALLOWED_HOSTS.append(os.environ['RENDER_EXTERNAL_HOSTNAME'])
-if 'RENDER' in os.environ and ('SECRET_KEY' not in os.environ or 'DATABASE_URL' not in os.environ):
-    raise ValueError('SECRET_KEY and DATABASE_URL must be set on Render')
+if 'RENDER' in os.environ and 'SECRET_KEY' not in os.environ:
+    raise ValueError('SECRET_KEY must be set on Render')
 
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -98,9 +97,14 @@ WSGI_APPLICATION = 'realestate.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
-DATABASES = {'default': dj_database_url.config(
-    default=f'sqlite:///{BASE_DIR / "db.sqlite3"}', conn_max_age=600,
-)}
+# Always the committed SQLite file, locally and on Render. Render's free disk is
+# ephemeral, so edits made on the live site reset on each deploy or restart.
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
